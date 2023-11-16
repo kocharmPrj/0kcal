@@ -3,7 +3,6 @@
 * (간략히 프로젝트를 설명하고, 최종 목표가 무엇인지에 대해 기술)
 
 ## High Level Design
-
 ![initial](https://user-images.githubusercontent.com/97004727/283388835-2e047383-09a2-4c10-854f-e4cc1a7eef38.png)
 ## Clone code
 
