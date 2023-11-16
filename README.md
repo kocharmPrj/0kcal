@@ -1,7 +1,6 @@
 # !(맛있으면 0 kcal)
-
-* (간략히 프로젝트를 설명하고, 최종 목표가 무엇인지에 대해 기술)
-
+음식을 인식하고 해당 음식의 영양정보와 칼로리를 보여주고 기록한다.
+하루 내에 기록된 정보를 바탕으로 하루 권장 칼로리 대비 섭취 칼로리 계산을 통해 식단관리를 해준다.
 ## High Level Design
 ![initial](https://user-images.githubusercontent.com/97004727/283388835-2e047383-09a2-4c10-854f-e4cc1a7eef38.png)
 ## Clone code
