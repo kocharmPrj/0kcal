@@ -5,7 +5,7 @@
 ## High Level Design
 
 * (프로젝트 아키텍쳐 기술, 전반적인 diagram 으로 설명을 권장)
-
+![initial](https://user-images.githubusercontent.com/97004727/283388835-2e047383-09a2-4c10-854f-e4cc1a7eef38.png)
 ## Clone code
 
 * (각 팀에서 프로젝트를 위해 생성한 repository에 대한 code clone 방법에 대해서 기술)
