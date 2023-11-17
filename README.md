@@ -2,7 +2,8 @@
 음식을 인식하고 해당 음식의 영양정보와 칼로리를 보여주고 기록한다.
 하루 내에 기록된 정보를 바탕으로 하루 권장 칼로리 대비 섭취 칼로리 계산을 통해 식단관리를 해준다.
 ## High Level Design
-![initial](https://user-images.githubusercontent.com/97004727/283388835-2e047383-09a2-4c10-854f-e4cc1a7eef38.png)
+![image](https://github.com/kocharmPrj/0kcal/assets/97004727/084f031f-3ae7-4855-b8b6-fd5a3a737b3c)
+
 ## Clone code
 
 * (각 팀에서 프로젝트를 위해 생성한 repository에 대한 code clone 방법에 대해서 기술)
