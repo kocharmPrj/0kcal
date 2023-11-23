@@ -14,36 +14,80 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(801, 599)
+        MainWindow.resize(870, 770)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.widget = QtWidgets.QWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(80, 70, 634, 395))
+        self.widget.setGeometry(QtCore.QRect(80, 80, 700, 650))
         self.widget.setObjectName("widget")
+
         self.gridLayout = QtWidgets.QGridLayout(self.widget)
-        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout.setContentsMargins(0, 0, 0, 20)
         self.gridLayout.setObjectName("gridLayout")
+
         self.label = QtWidgets.QLabel(self.widget)
+        self.label.setMaximumSize(QtCore.QSize(700, 500))
         self.label.setFrameShape(QtWidgets.QFrame.Box)
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../Downloads/jellyfish.jpg"))
+        self.label.setPixmap(QtGui.QPixmap("../Controller_Suengkwon/image.jpeg"))
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+
         self.splitter = QtWidgets.QSplitter(self.widget)
-        self.splitter.setOrientation(QtCore.Qt.Horizontal)
+        self.splitter.setEnabled(True)
+        self.splitter.setMinimumSize(QtCore.QSize(700, 60))
+        self.splitter.setMaximumSize(QtCore.QSize(800, 60))
         self.splitter.setObjectName("splitter")
+        self.splitter.setStyleSheet("background-color:rgb(200, 200, 200);\n"
+        "padding: 10px 30px;\n"
+        "border-radius: 10px;\n")
+
         self.pushButton_todayDiet = QtWidgets.QPushButton(self.splitter)
         self.pushButton_todayDiet.setObjectName("pushButton_todayDiet")
+        self.pushButton_todayDiet.setMaximumSize(QtCore.QSize(200, 50))
+        self.pushButton_todayDiet.setStyleSheet("background-color:rgb(70, 70, 255);\n"
+        "padding: 10px 30px;\n"
+        "border-radius: 15px;\n"
+        "color: white;\n")
+
         self.pushButton_foodInfo = QtWidgets.QPushButton(self.splitter)
         self.pushButton_foodInfo.setObjectName("pushButton_foodInfo")
+        self.pushButton_foodInfo.setMaximumSize(QtCore.QSize(70, 50))
+        self.pushButton_foodInfo.setStyleSheet("background-color:rgb(230, 230, 230);\n"
+        "padding: 5px 10px;\n"
+        "border-radius: 20px;\n")
+
         self.pushButton_menuInfo = QtWidgets.QPushButton(self.splitter)
         self.pushButton_menuInfo.setObjectName("pushButton_menuInfo")
+        self.pushButton_menuInfo.setMaximumSize(QtCore.QSize(70, 50))
+        self.pushButton_menuInfo.setStyleSheet("background-color:rgb(230, 230, 230);\n"
+        "padding: 5px 10px;\n"
+        "border-radius: 20px;\n")
+
         self.pushButton_galleryView = QtWidgets.QPushButton(self.splitter)
         self.pushButton_galleryView.setObjectName("pushButton_galleryView")
+        self.pushButton_galleryView.setMaximumSize(QtCore.QSize(200, 50))
+        self.pushButton_galleryView.setStyleSheet("background-color:rgb(70, 70, 255);\n"
+        "padding: 10px 30px;\n"
+        "border-radius: 15px;\n"
+        "color: white;\n")
+
         self.gridLayout.addWidget(self.splitter, 1, 0, 1, 1)
+
+        self.homeButton = QtWidgets.QPushButton(self.centralwidget)
+        self.homeButton.setGeometry(QtCore.QRect(740, 50, 50, 45))
+        self.homeButton.setStyleSheet("border-image:url(\"../Controller_Suengkwon/home.png\");\n")
+        self.homeButton.setText("")
+        self.homeButton.setObjectName("homeButton")
+
+        self.menuButton = QtWidgets.QPushButton(self.centralwidget)
+        self.menuButton.setGeometry(QtCore.QRect(80, 63, 27, 22))
+        self.menuButton.setStyleSheet("border-image:url(\"../Controller_Suengkwon/menu.png\");")
+        self.menuButton.setText("")
+        self.menuButton.setObjectName("menuButton")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 801, 22))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -57,8 +101,8 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton_todayDiet.setText(_translate("MainWindow", "Today\'s Diet"))
-        self.pushButton_foodInfo.setText(_translate("MainWindow", "Food Info"))
-        self.pushButton_menuInfo.setText(_translate("MainWindow", "Menu Info"))
+        self.pushButton_foodInfo.setText(_translate("MainWindow", "Food"))
+        self.pushButton_menuInfo.setText(_translate("MainWindow", "Menu"))
         self.pushButton_galleryView.setText(_translate("MainWindow", "gallery view"))
 
 # if __name__ == "__main__":
