@@ -29,7 +29,7 @@
     <enum>Qt::PlainText</enum>
    </property>
    <property name="pixmap">
-    <pixmap>../Downloads/menu.jpg</pixmap>
+    <pixmap>../../../Downloads/menu.jpg</pixmap>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_18">

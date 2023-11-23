@@ -19,7 +19,7 @@ class Ui_MenuInfoDialog(object):
         self.label.setGeometry(QtCore.QRect(10, 20, 291, 431))
         self.label.setText("")
         self.label.setTextFormat(QtCore.Qt.PlainText)
-        self.label.setPixmap(QtGui.QPixmap("../Downloads/menu.jpg"))
+        self.label.setPixmap(QtGui.QPixmap("../../../Downloads/menu.jpg"))
         self.label.setObjectName("label")
         self.lineEdit_18 = QtWidgets.QLineEdit(MenuInfoDialog)
         self.lineEdit_18.setGeometry(QtCore.QRect(462, 300, 138, 23))

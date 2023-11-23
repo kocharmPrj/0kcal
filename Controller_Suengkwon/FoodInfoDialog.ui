@@ -29,7 +29,7 @@
     <enum>Qt::PlainText</enum>
    </property>
    <property name="pixmap">
-    <pixmap>../Downloads/jellyfish.jpg</pixmap>
+    <pixmap>../../../Downloads/jellyfish.jpg</pixmap>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">

@@ -19,7 +19,7 @@ class Ui_FoodInfoDialog(object):
         self.label.setGeometry(QtCore.QRect(10, 20, 400, 300))
         self.label.setText("")
         self.label.setTextFormat(QtCore.Qt.PlainText)
-        self.label.setPixmap(QtGui.QPixmap("../Downloads/jellyfish.jpg"))
+        self.label.setPixmap(QtGui.QPixmap("../../../Downloads/jellyfish.jpg"))
         self.label.setObjectName("label")
         self.layoutWidget = QtWidgets.QWidget(FoodInfoDialog)
         self.layoutWidget.setGeometry(QtCore.QRect(160, 370, 142, 83))
