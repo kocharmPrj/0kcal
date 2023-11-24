@@ -8,6 +8,9 @@
         "MainWidget.py",
         "MainWidget.ui",
         "MenuInfoDialog.py",
-        "MenuInfoDialog.ui"
+        "MenuInfoDialog.ui",
+        "temp.py",
+        "temp2.py",
+        "thread.py"
     ]
 }
