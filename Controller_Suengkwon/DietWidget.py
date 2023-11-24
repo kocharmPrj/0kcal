@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_DietWidget(object):
+
     def setMealFrame(self, addr, x, y):
         meal = QtWidgets.QFrame(self.frame)
         meal.setGeometry(QtCore.QRect(x, y, 671, 211))
