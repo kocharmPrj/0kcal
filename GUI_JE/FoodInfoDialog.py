@@ -9,12 +9,138 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QPushButton, QLabel
 
+import time
 
 class Ui_FoodInfoDialog(object):
+    def __init__(self, pic=None, mat=None):
+        super().__init__()
+        if pic is not None:
+            print("got pic in init of food info")
+        else:
+            print("empty in food info..")
+        if pic is not None:
+            self.tmpPicInDialog = pic
+        if mat is not None:
+            self.tmpMatInDialog = mat
+        self.foodData = {
+            'name': 'a',
+            'calorie': 1,
+            'carbo': 2,
+            'protein': 3,
+            'fat': 4,
+            'sugar': 5,
+            'sodium': 6
+            }
+        self.btnToStore = QPushButton("store")
+        self.btnToCancel = QPushButton("cancel")
+
+        self.tmpPicInDialog = None
+        self.tmpMatInDialog = None
+        self.timeList = None
+        self.currentTime = None
+        self.timeList = self.getTime()
+        self.time_str = [str(i) for i in self.timeList]
+
+        if pic is not None:
+            print("pic is not None in abstract")
+            self.tmpPicInDialog = pic
+
+#        if self.tmpPicInDialog is not None:
+#            self.label.setPixmap(self.tmpPicInDialog)
+        else:
+            print("empty!")
+
+    def setImageLabel(self, pic):
+        return self.label.setPixmap(pic)
+
+    def getTime(self) -> time:
+        tm = time.localtime(time.time())
+        returnList = [tm.tm_mon, tm.tm_mday, tm.tm_hour, tm.tm_min]
+        return returnList
+
+    def getPicAndMatData(self, pic, mat):
+        self.tmpPicInDialog = pic
+        self.tmpMatInDialog = mat
+
+    def setFoodFrame(self):
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 259, 3000))
+        self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 3000))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.date = QtWidgets.QLineEdit(self.scrollAreaWidgetContents)
+        self.date.setGeometry(QtCore.QRect(10, 10, 181, 20))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.date.setFont(font)
+        self.date.setFrame(False)
+        self.date.setObjectName("date")
+        self.frame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
+        self.frame.setGeometry(QtCore.QRect(0, 30, 261, 3000))
+        self.frame.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame.setObjectName("frame")
+        self.food_frame = QtWidgets.QFrame(self.frame)
+        self.food_frame.setGeometry(QtCore.QRect(10, 10, 240, 95))
+        self.food_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.food_frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.food_frame.setObjectName("food_frame")
+        self.title_food_name = QtWidgets.QLineEdit(self.food_frame)
+        self.title_food_name.setGeometry(QtCore.QRect(10, 10, 100, 20))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        self.title_food_name.setFont(font)
+        self.title_food_name.setFrame(False)
+        self.title_food_name.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.title_food_name.setDragEnabled(False)
+        self.title_food_name.setReadOnly(True)
+        self.title_food_name.setObjectName("title_food_name")
+        self.title_volumn = QtWidgets.QLineEdit(self.food_frame)
+        self.title_volumn.setGeometry(QtCore.QRect(10, 40, 100, 20))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setItalic(False)
+        font.setUnderline(False)
+        font.setStrikeOut(False)
+        font.setKerning(True)
+        self.title_volumn.setFont(font)
+        self.title_volumn.setFrame(False)
+        self.title_volumn.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.title_volumn.setDragEnabled(False)
+        self.title_volumn.setReadOnly(True)
+        self.title_volumn.setObjectName("title_volumn")
+        self.food_name = QtWidgets.QLineEdit(self.food_frame)
+        self.food_name.setGeometry(QtCore.QRect(110, 10, 120, 20))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.food_name.setFont(font)
+        self.food_name.setFrame(False)
+        self.food_name.setObjectName("food_name")
+        self.volumn = QtWidgets.QComboBox(self.food_frame)
+        self.volumn.setGeometry(QtCore.QRect(110, 40, 111, 20))
+        self.volumn.setObjectName("volumn")
+        self.volumn.addItem("")
+        self.volumn.addItem("")
+        self.volumn.addItem("")
+        self.select_button = QtWidgets.QPushButton(self.food_frame)
+        self.select_button.setGeometry(QtCore.QRect(178, 68, 51, 21))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.select_button.setFont(font)
+        self.select_button.setStyleSheet("background-color:rgb(200,200,200);\n"
+"border-radius:5px")
+        self.select_button.setObjectName("select_button")
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+
+
     def setupUi(self, FoodInfoDialog):
         FoodInfoDialog.setObjectName("FoodInfoDialog")
         FoodInfoDialog.resize(720, 540)
+        self.currentTime = QLabel(' '.join(self.time_str))
+
         self.picture = QtWidgets.QLabel(FoodInfoDialog)
         self.picture.setGeometry(QtCore.QRect(40, 30, 381, 300))
         self.picture.setText("")
@@ -80,69 +206,26 @@ class Ui_FoodInfoDialog(object):
         self.nutrition.setFont(font)
         self.nutrition.setFrame(False)
         self.nutrition.setObjectName("nutrition")
-        self.selectButton = QtWidgets.QPushButton(FoodInfoDialog)
-        self.selectButton.setGeometry(QtCore.QRect(540, 250, 51, 25))
-        self.selectButton.setStyleSheet("background-color:rgb(150, 150, 150);\n"
-        "border-radius: 5px;\n"
-        "color: white;\n")
-        self.selectButton.setObjectName("selectButton")
-        self.food_name = QtWidgets.QLineEdit(FoodInfoDialog)
-        self.food_name.setGeometry(QtCore.QRect(450, 60, 140, 29))
-        font = QtGui.QFont()
-        font.setPointSize(15)
-        font.setBold(True)
-        self.food_name.setFont(font)
-        self.food_name.setFrame(False)
-        self.food_name.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
-        self.food_name.setDragEnabled(False)
-        self.food_name.setReadOnly(True)
-        self.food_name.setObjectName("food_name")
-        self.food_name_info = QtWidgets.QLineEdit(FoodInfoDialog)
-        self.food_name_info.setGeometry(QtCore.QRect(450, 90, 140, 25))
-        font = QtGui.QFont()
-        font.setPointSize(13)
-        self.food_name_info.setFont(font)
-        self.food_name_info.setFrame(False)
-        self.food_name_info.setObjectName("food_name_info")
-        self.time = QtWidgets.QLineEdit(FoodInfoDialog)
-        self.time.setGeometry(QtCore.QRect(450, 140, 140, 29))
-        font = QtGui.QFont()
-        font.setPointSize(15)
-        font.setBold(True)
-        self.time.setFont(font)
-        self.time.setFrame(False)
-        self.time.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
-        self.time.setDragEnabled(False)
-        self.time.setReadOnly(True)
-        self.time.setObjectName("time")
-        self.time_info = QtWidgets.QLineEdit(FoodInfoDialog)
-        self.time_info.setGeometry(QtCore.QRect(450, 170, 140, 25))
-        font = QtGui.QFont()
-        font.setPointSize(13)
-        self.time_info.setFont(font)
-        self.time_info.setFrame(False)
-        self.time_info.setObjectName("time_info")
-        self.volumn = QtWidgets.QLineEdit(FoodInfoDialog)
-        self.volumn.setGeometry(QtCore.QRect(450, 220, 140, 29))
-        font = QtGui.QFont()
-        font.setPointSize(15)
-        font.setBold(True)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setStrikeOut(False)
-        font.setKerning(True)
-        self.volumn.setFont(font)
-        self.volumn.setFrame(False)
-        self.volumn.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
-        self.volumn.setDragEnabled(False)
-        self.volumn.setReadOnly(True)
-        self.volumn.setObjectName("volumn")
-        self.volumn_box = QtWidgets.QComboBox(FoodInfoDialog)
-        self.volumn_box.setGeometry(QtCore.QRect(448, 250, 91, 25))
-        self.volumn_box.setObjectName("volumn_box")
-        self.volumn_box.addItem("")
-        self.volumn_box.addItem("")
-        self.volumn_box.addItem("")
+
+        self.btnToStore = QtWidgets.QPushButton(FoodInfoDialog)
+        self.btnToStore.setGeometry(QtCore.QRect(480, 370, 89, 25))
+        self.btnToStore.setObjectName("pushButton")
+        self.btnToCancel = QtWidgets.QPushButton(FoodInfoDialog)
+        self.btnToCancel.setGeometry(QtCore.QRect(600, 370, 89, 25))
+        self.btnToCancel.setObjectName("pushButton_2")
+
+
+        self.label = QtWidgets.QLabel(FoodInfoDialog)
+        self.label.setGeometry(QtCore.QRect(10, 20, 400, 300))
+        self.label.setText("")
+        self.label.setTextFormat(QtCore.Qt.PlainText)
+        self.label.setPixmap(QtGui.QPixmap("../../../Downloads/jellyfish.jpg"))
+        self.label.setObjectName("label")
+        self.scrollArea = QtWidgets.QScrollArea(FoodInfoDialog)
+        self.scrollArea.setGeometry(QtCore.QRect(410, 10, 275, 341))
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.setFoodFrame()
 
         self.retranslateUi(FoodInfoDialog)
         QtCore.QMetaObject.connectSlotsByName(FoodInfoDialog)
@@ -178,15 +261,15 @@ class Ui_FoodInfoDialog(object):
         item.setText(_translate("FoodInfoDialog", "3.2"))
         self.nutrition_table.setSortingEnabled(__sortingEnabled)
         self.nutrition.setText(_translate("FoodInfoDialog", "Nutritional Information"))
-        self.selectButton.setText(_translate("FoodInfoDialog", "select"))
-        self.food_name.setText(_translate("FoodInfoDialog", "Food Name"))
-        self.food_name_info.setText(_translate("FoodInfoDialog", "Kimchi jjigae"))
-        self.time.setText(_translate("FoodInfoDialog", "Time"))
-        self.time_info.setText(_translate("FoodInfoDialog", "12:08"))
-        self.volumn.setText(_translate("FoodInfoDialog", "volumn"))
-        self.volumn_box.setItemText(0, _translate("FoodInfoDialog", "150g"))
-        self.volumn_box.setItemText(1, _translate("FoodInfoDialog", "200g(1person)"))
-        self.volumn_box.setItemText(2, _translate("FoodInfoDialog", "250g"))
+
+        self.date.setText(_translate("FoodInfoDialog", "2023/11/24   12:08"))
+        self.title_food_name.setText(_translate("FoodInfoDialog", "Food Name"))
+        self.title_volumn.setText(_translate("FoodInfoDialog", "Volumn"))
+        self.food_name.setText(_translate("FoodInfoDialog", "Kimchi jjigae"))
+        self.volumn.setItemText(0, _translate("FoodInfoDialog", "150g"))
+        self.volumn.setItemText(1, _translate("FoodInfoDialog", "200g(1person)"))
+        self.volumn.setItemText(2, _translate("FoodInfoDialog", "250g"))
+        self.select_button.setText(_translate("FoodInfoDialog", "Select"))
 
 
 if __name__ == "__main__":

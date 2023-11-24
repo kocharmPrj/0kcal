@@ -12,6 +12,41 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MenuInfoDialog(object):
+    def __init__(self, pic=None, mat=None):
+        super().__init__()
+        if pic is not None:
+            print("got pic in init of food info")
+        else:
+            print("empty in food info..")
+        if pic is not None:
+            self.tmpPicInDialog = pic
+        if mat is not None:
+            self.tmpMatInDialog = mat
+
+
+        self.tmpPicInDialog = None
+        self.tmpMatInDialog = None
+#        self.timeList = None
+#        self.currentTime = None
+#        self.timeList = self.getTime()
+#        self.time_str = [str(i) for i in self.timeList]
+
+        if pic is not None:
+            print("pic is not None in abstract")
+            self.tmpPicInDialog = pic
+
+#        if self.tmpPicInDialog is not None:
+#            self.label.setPixmap(self.tmpPicInDialog)
+        else:
+            print("empty!")
+
+    def setImageLabel(self, pic):
+        return self.label.setPixmap(pic)
+
+    def getPicAndMatData(self, pic, mat):
+        self.tmpPicInDialog = pic
+        self.tmpMatInDialog = mat
+
     def setupUi(self, MenuInfoDialog):
         MenuInfoDialog.setObjectName("MenuInfoDialog")
         MenuInfoDialog.resize(640, 480)

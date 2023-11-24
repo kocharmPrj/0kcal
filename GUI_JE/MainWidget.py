@@ -9,8 +9,17 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QPixmap, QColor, QImage
+from PyQt5.QtCore import QFile, Qt, QSize
+import cv2
 
 class Ui_MainWidget(object):
+    def __init__(self):
+        super().__init__()
+        self.tmpMat = None
+        self.tmpQPic = None
+        self.tmpImg = None
+        self.image_label = None
 
     def setupUi(self, MainWidget):
         MainWidget.setObjectName("MainWidget")
@@ -64,6 +73,21 @@ class Ui_MainWidget(object):
 
         self.retranslateUi(MainWidget)
         QtCore.QMetaObject.connectSlotsByName(MainWidget)
+
+    def updateImageLabel(self, image):
+            self.label.setPixmap(image)
+            print("2.1")
+
+    def cvMatToQtImage(self, mat) -> QPixmap:
+        rgbImage = cv2.cvtColor(mat, cv2.COLOR_BGR2RGB)
+        h, w, ch = rgbImage.shape
+        bytesPerLine = w * ch
+        convertToQtImageFormat = QImage(rgbImage, w, h, bytesPerLine, QImage.Format_RGB888)
+        p = convertToQtImageFormat.scaled(QSize(640, 480), Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        self.tmpImg = p
+        print("2")
+        return QPixmap.fromImage(p)
+
 
     def retranslateUi(self, MainWidget):
         _translate = QtCore.QCoreApplication.translate
