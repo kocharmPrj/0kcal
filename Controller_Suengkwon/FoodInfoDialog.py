@@ -12,9 +12,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_FoodInfoDialog(object):
+
     def setupUi(self, FoodInfoDialog):
         FoodInfoDialog.setObjectName("FoodInfoDialog")
-        FoodInfoDialog.resize(640, 480)
+        FoodInfoDialog.resize(720, 540)
         self.picture = QtWidgets.QLabel(FoodInfoDialog)
         self.picture.setGeometry(QtCore.QRect(40, 30, 381, 300))
         self.picture.setText("")
