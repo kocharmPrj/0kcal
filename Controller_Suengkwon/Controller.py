@@ -1,3 +1,4 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QStackedWidget, QDialog
 from PyQt5.uic import loadUi
 import sys
@@ -8,38 +9,50 @@ from FoodInfoDialog import Ui_FoodInfoDialog
 from MenuInfoDialog import Ui_MenuInfoDialog
 
 class MainScreen(QWidget):
-    def __init__(self):
-        super().__init__()
-        loadUi("MainWidget.ui", self)
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.ui = Ui_MainWidget()
+        self.ui.setupUi(self)
+
+        # Add Button
+        self.ui.pushButton_todayDiet.clicked.connect(parent.switch_diet)
+        self.ui.pushButton_galleryView.clicked.connect(parent.switch_gallery)
+        self.ui.pushButton_foodInfo.clicked.connect(parent.popup_food)
+        self.ui.pushButton_menuInfo.clicked.connect(parent.popup_menu)
 
 class DietScreen(QWidget):
     def __init__(self):
         super().__init__()
-        loadUi("DietWidget.ui", self)
+        self.ui = Ui_DietWidget()
+        self.ui.setupUi(self)
 
 class GalleryScreen(QWidget):
     def __init__(self):
         super().__init__()
-        loadUi("DietWidget.ui", self)
+        self.ui = Ui_DietWidget()
+        self.ui.setupUi(self)
 
 class FoodinfoScreen(QDialog):
     def __init__(self):
         super().__init__()
-        loadUi("FoodInfoDialog.ui", self)
+        self.ui = Ui_FoodInfoDialog()
+        self.ui.setupUi(self)
 
 class MenuInfoScreen(QDialog):
     def __init__(self):
         super().__init__()
-        loadUi("MenuInfoDialog.ui", self)
+        self.ui = Ui_MenuInfoDialog()
+        self.ui.setupUi(self)
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.stacked_widget = QStackedWidget(self)
         self.setCentralWidget(self.stacked_widget)
+        self.setGeometry(100, 100, 800, 600)
 
         # Load UI objects
-        self.main_screen = MainScreen()
+        self.main_screen = MainScreen(self)
         self.diet_screen = DietScreen()
         self.gallery_screen = GalleryScreen()
         self.foodinfo_screen = FoodinfoScreen()
@@ -56,10 +69,6 @@ class MainWindow(QMainWindow):
         # Associating buttons with interations
         self.switch_button = QPushButton("Home", self)
         self.switch_button.clicked.connect(self.switch_home)
-        self.main_screen.pushButton_todayDiet.clicked.connect(self.switch_diet)
-        self.main_screen.pushButton_galleryView.clicked.connect(self.switch_gallery)
-        self.main_screen.pushButton_foodInfo.clicked.connect(self.popup_food)
-        self.main_screen.pushButton_menuInfo.clicked.connect(self.popup_menu)
         
         # Set up the layout
         layout = QVBoxLayout(self)
@@ -85,9 +94,14 @@ class MainWindow(QMainWindow):
         # self.dialog.resize(640, 480)
         self.menuifo_screen.show()
 
+    # def set_calories(self):
+    #     _translate = QtCore.QCoreApplication.translate
+    #     self.foodinfo_screen.comboBox_grams.setItemText(0, _translate("", "g"))
+    #     self.foodinfo_screen.comboBox_grams.setItemText(1, _translate("", "g"))
+    #     self.foodinfo_screen.comboBox_grams.setItemText(2, _translate("", "g"))
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MainWindow()
-    window.setGeometry(100, 100, 800, 600)
     window.show()
     sys.exit(app.exec_())
