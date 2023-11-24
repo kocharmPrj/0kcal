@@ -1,0 +1,13 @@
+{
+    "files": [
+        "Controller.py",
+        "DietWidget.py",
+        "DietWidget.ui",
+        "FoodInfoDialog.py",
+        "FoodInfoDialog.ui",
+        "MainWidget.py",
+        "MainWidget.ui",
+        "MenuInfoDialog.py",
+        "MenuInfoDialog.ui"
+    ]
+}
