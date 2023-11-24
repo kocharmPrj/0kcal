@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_FoodInfoDialog(object):
+
     def setupUi(self, FoodInfoDialog):
         FoodInfoDialog.setObjectName("FoodInfoDialog")
         FoodInfoDialog.resize(720, 540)

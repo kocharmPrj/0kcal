@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MenuInfoDialog(object):
+
     def setupUi(self, MenuInfoDialog):
         MenuInfoDialog.setObjectName("MenuInfoDialog")
         MenuInfoDialog.resize(640, 480)
