@@ -40,16 +40,13 @@ class Ui_FoodInfoDialog(object):
         self.currentTime = None
         self.timeList = self.getTime()
         self.time_str = [str(i) for i in self.timeList]
+        self.tmp_button_index = 1
 
         self.count = 2
         self.total_nut = [0, 0, 0, 0, 0, 0]
-        self.database = (("kimchi jjigae","300","0","1","2","3","4","5"), ("galbi","200","10","11","12","13","14","15"))
+        self.database = (("kimchi jjigae","300","10","20","30","40","50","60"), ("galbi","200","11","21","31","41","51","61"))
 
-
-#        if pic is not None:
-#            self.tmpPicInDialog = pic
-#        else:
-#            print("empty!")
+        self.local_db = [[] for _ in range(self.count)]
 
     def setImageLabel(self, pic):
         return self.label.setPixmap(pic)
@@ -65,8 +62,12 @@ class Ui_FoodInfoDialog(object):
 
     def selectButtonTo(self, x):
         _translate = QtCore.QCoreApplication.translate
+        vol_change = [0.5, 1, 1.5]
         for i in range(6):
-            self.total_nut[i] += int(self.database[x][i+2])
+            self.local_db[x][i+2] = float(self.database[x][i+2])*vol_change[self.volumn_list[x].currentIndex()]
+            self.total_nut[i] -= float(self.database[x][i+2])*vol_change[self.tmp_button_index]
+            self.total_nut[i] += self.local_db[x][i+2]
+        self.tmp_button_index = self.volumn_list[x].currentIndex()
         item = self.nutrition_table.item(0, 0)
         item.setText(_translate("FoodInfoDialog", str(self.total_nut[0])))
         item = self.nutrition_table.item(0, 1)
@@ -79,6 +80,8 @@ class Ui_FoodInfoDialog(object):
         item.setText(_translate("FoodInfoDialog", str(self.total_nut[4])))
         item = self.nutrition_table2.item(0, 2)
         item.setText(_translate("FoodInfoDialog", str(self.total_nut[5])))
+        print(self.local_db)
+        print(self.total_nut)
 
     def setFoodFrame(self, x):
         food_frame = QtWidgets.QFrame(self.frame)
@@ -126,13 +129,7 @@ class Ui_FoodInfoDialog(object):
         volumn.addItem("")
         volumn.addItem("")
         volumn.addItem("")
-#        volumn = QtWidgets.QLineEdit(food_frame)
-#        volumn.setGeometry(QtCore.QRect(110, 40, 111, 20))
-#        font = QtGui.QFont()
-#        font.setPointSize(12)
-#        volumn.setFont(font)
-#        volumn.setFrame(False)
-#        volumn.setObjectName("food_name")
+        volumn.setCurrentIndex(1)
 
         select_button = QtWidgets.QPushButton(food_frame)
         select_button.setGeometry(QtCore.QRect(178, 68, 51, 21))
@@ -295,27 +292,38 @@ class Ui_FoodInfoDialog(object):
         item.setText(_translate("FoodInfoDialog", "Sugar[g]"))
         item = self.nutrition_table2.horizontalHeaderItem(2)
         item.setText(_translate("FoodInfoDialog", "Sodium[g]"))
-        item = self.nutrition_table.item(0, 0)
-        item.setText(_translate("FoodInfoDialog", "0"))
-        item = self.nutrition_table.item(0, 1)
-        item.setText(_translate("FoodInfoDialog", "0"))
-        item = self.nutrition_table.item(0, 2)
-        item.setText(_translate("FoodInfoDialog", "0"))
-        item = self.nutrition_table2.item(0, 0)
-        item.setText(_translate("FoodInfoDialog", "0"))
-        item = self.nutrition_table2.item(0, 1)
-        item.setText(_translate("FoodInfoDialog", "0"))
-        item = self.nutrition_table2.item(0, 2)
-        item.setText(_translate("FoodInfoDialog", "0"))
+
         self.nutrition.setText(_translate("FoodInfoDialog", "Nutritional Information"))
         self.date.setText(_translate("FoodInfoDialog", "2023/11/24   12:08"))
 
         for i in range(self.count):
             self.food_name_list[i].setText(_translate("FoodInfoDialog", self.database[i][0]))
-            self.volumn_list[i].setItemText(0, _translate("FoodInfoDialog", str(int(float(self.database[i][1])/2))))
-            self.volumn_list[i].setItemText(1, _translate("FoodInfoDialog", str(int(float(self.database[i][1])))))
-            self.volumn_list[i].setItemText(2, _translate("FoodInfoDialog", str(int(float(self.database[i][1])*1.5))))
+            self.local_db[i].append(self.database[i][0])
+            self.volumn1 = str(int(float(self.database[i][1])/2))
+            self.volumn2 = self.database[i][1]
+            self.volumn3 = str(int(float(self.database[i][1])*1.5))
+            self.local_db[i].append(self.volumn2)
+            vol_change = [0.5, 1, 1.5]
+            for j in range(6):
+                self.local_db[i].append(float(self.database[i][j+2])*vol_change[self.volumn_list[i].currentIndex()])
+                self.total_nut[j] += float(self.database[i][j+2])*vol_change[self.volumn_list[i].currentIndex()]
+            self.volumn_list[i].setItemText(0, _translate("FoodInfoDialog", self.volumn1))
+            self.volumn_list[i].setItemText(1, _translate("FoodInfoDialog", self.volumn2))
+            self.volumn_list[i].setItemText(2, _translate("FoodInfoDialog", self.volumn3))
             self.select_button_list[i].setText(_translate("FoodInfoDialog", "Select"))
+
+        item = self.nutrition_table.item(0, 0)
+        item.setText(_translate("FoodInfoDialog", str(self.total_nut[0])))
+        item = self.nutrition_table.item(0, 1)
+        item.setText(_translate("FoodInfoDialog", str(self.total_nut[1])))
+        item = self.nutrition_table.item(0, 2)
+        item.setText(_translate("FoodInfoDialog", str(self.total_nut[2])))
+        item = self.nutrition_table2.item(0, 0)
+        item.setText(_translate("FoodInfoDialog", str(self.total_nut[3])))
+        item = self.nutrition_table2.item(0, 1)
+        item.setText(_translate("FoodInfoDialog", str(self.total_nut[4])))
+        item = self.nutrition_table2.item(0, 2)
+        item.setText(_translate("FoodInfoDialog", str(self.total_nut[5])))
 
         self.btnToStore.setText(_translate("FoodInfoDialog", "Store"))
         self.btnToCancel.setText(_translate("FoodInfoDialog", "Cancel"))
