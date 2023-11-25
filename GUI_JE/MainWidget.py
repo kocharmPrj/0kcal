@@ -76,16 +76,14 @@ class Ui_MainWidget(object):
 
     def updateImageLabel(self, image):
             self.label.setPixmap(image)
-            print("2.1")
 
     def cvMatToQtImage(self, mat) -> QPixmap:
         rgbImage = cv2.cvtColor(mat, cv2.COLOR_BGR2RGB)
         h, w, ch = rgbImage.shape
         bytesPerLine = w * ch
         convertToQtImageFormat = QImage(rgbImage, w, h, bytesPerLine, QImage.Format_RGB888)
-        p = convertToQtImageFormat.scaled(QSize(640, 480), Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        p = convertToQtImageFormat.scaled(QSize(720, 500), Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.tmpImg = p
-        print("2")
         return QPixmap.fromImage(p)
 
 

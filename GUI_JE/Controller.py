@@ -9,6 +9,8 @@ from DietWidget import Ui_DietWidget
 from FoodInfoDialog import Ui_FoodInfoDialog
 from MenuInfoDialog import Ui_MenuInfoDialog
 from thread import RunVideo
+from MenuProcess import MenuProcessor
+from functools import partial
 
 class MainScreen(QWidget):
     def __init__(self, parent):
@@ -40,7 +42,14 @@ class FoodinfoScreen(QDialog):
         super().__init__()
         self.ui = Ui_FoodInfoDialog(pic, mat)
         self.ui.setupUi(self)
+        self.ui.tmpPicInDialog
+        self.ui.tmpPicInDialog = self.ui.tmpPicInDialog.scaled(360, 300)
         self.ui.picture.setPixmap(self.ui.tmpPicInDialog)
+
+        # Add Button
+        for i in range(self.ui.count):
+            self.ui.select_button_list[i].clicked.connect(partial(self.ui.selectButtonTo, i))
+
 
 class MenuInfoScreen(QDialog):
     def __init__(self, pic, mat):
@@ -48,6 +57,11 @@ class MenuInfoScreen(QDialog):
         self.ui = Ui_MenuInfoDialog(pic, mat)
         self.ui.setupUi(self)
         self.ui.label.setPixmap(self.ui.tmpPicInDialog)
+
+        # Add Button
+        for i in range(self.ui.count):
+            self.ui.select_button_list[i].clicked.connect(partial(self.ui.selectButtonTo, i))
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -121,14 +135,14 @@ class MainWindow(QMainWindow):
 
 
     def INMAIN_show_menu_dialog(self):
+#        self._infer = MenuProcessor(self.main_screen.ui.tmpMat, "/home/judy/0kcal/GUI_JE/openvino.xml")
+#        self.inferenced_string = self._infer.inferencing()
         self._menu_dialog = MenuInfoScreen(self.main_screen.ui.tmpQPic, self.main_screen.ui.tmpMat)
         self._menu_dialog.show()
 
     def INMAIN_show_food_dialog(self):
         self._food_dialog = FoodinfoScreen(self.main_screen.ui.tmpQPic, self.main_screen.ui.tmpMat)
-        print("chk-1")
         self._food_dialog.ui.btnToStore.clicked.connect(lambda: self.INFOOD_store_food_data(self._food_dialog.ui.tmpPicInDialog, ''.join(map(str, self._food_dialog.ui.timeList)), self._food_dialog.ui.foodData))
-        print("chk0")
         self._food_dialog.ui.btnToCancel.clicked.connect(self.INFOOD_cancel_food_dialog)
         self._food_dialog.show()
 
