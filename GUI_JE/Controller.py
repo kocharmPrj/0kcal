@@ -2,7 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel, QStackedWidget, QDialog
 from PyQt5.uic import loadUi
 import sys
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import QTimer, Qt
 
 from MainWidget import Ui_MainWidget
 from DietWidget import Ui_DietWidget
@@ -42,7 +42,6 @@ class FoodinfoScreen(QDialog):
         super().__init__()
         self.ui = Ui_FoodInfoDialog(pic, mat)
         self.ui.setupUi(self)
-        self.ui.tmpPicInDialog
         self.ui.tmpPicInDialog = self.ui.tmpPicInDialog.scaled(360, 300)
         self.ui.picture.setPixmap(self.ui.tmpPicInDialog)
 
@@ -56,6 +55,7 @@ class MenuInfoScreen(QDialog):
         super().__init__()
         self.ui = Ui_MenuInfoDialog(pic, mat)
         self.ui.setupUi(self)
+        self.ui.tmpPicInDialog = self.ui.tmpPicInDialog.scaled(659,668)
         self.ui.label.setPixmap(self.ui.tmpPicInDialog)
 
         # Add Button
@@ -135,8 +135,13 @@ class MainWindow(QMainWindow):
 
 
     def INMAIN_show_menu_dialog(self):
-#        self._infer = MenuProcessor(self.main_screen.ui.tmpMat, "/home/judy/0kcal/GUI_JE/openvino.xml")
-#        self.inferenced_string = self._infer.inferencing()
+        self._infer = MenuProcessor(self.main_screen.ui.tmpMat, "/home/judy/0kcal/GUI_JE/openvino.xml")
+        self.scan_image = self._infer.preprocessing()
+        self._infer.MakeRoi(self.scan_image)
+        self.result_strings = self._infer.Inference(self.scan_image)
+        print("Menu Lists:")
+        for i, result_string in enumerate(self.result_strings):
+            print(f"Menu {i + 1}: {result_string}")
         self._menu_dialog = MenuInfoScreen(self.main_screen.ui.tmpQPic, self.main_screen.ui.tmpMat)
         self._menu_dialog.show()
 
@@ -158,6 +163,15 @@ class MainWindow(QMainWindow):
     #     self.foodinfo_screen.comboBox_grams.setItemText(0, _translate("", "g"))
     #     self.foodinfo_screen.comboBox_grams.setItemText(1, _translate("", "g"))
     #     self.foodinfo_screen.comboBox_grams.setItemText(2, _translate("", "g"))
+
+    # Keyboard Interrupt
+    def keyPressEvent(self, e):
+        if e.key() == Qt.Key_Q:
+            self.close()
+        elif e.key() == Qt.Key_F:
+            self.INMAIN_show_food_dialog()
+        elif e.key() == Qt.Key_M:
+            self.INMAIN_show_menu_dialog()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

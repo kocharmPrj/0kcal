@@ -1,5 +1,5 @@
 # This Python file uses the following encoding: utf-8
-import np
+import numpy as np
 from PySide2.QtCore import Signal, QThread
 from cv2 import VideoCapture
 
@@ -15,9 +15,9 @@ class RunVideo(QThread):
     def run(self):
         try:
             if self.cap is None :
-                self.cap = VideoCapture(1)
+                self.cap = VideoCapture(0)
                 if not self.cap.isOpened():
-                    raise RuntimeError("Failed to open cam")
+                    raise RuntimeError("Failed to o+pen cam")
                 while self.running:
                     ret, img = self.cap.read()
                     if ret:

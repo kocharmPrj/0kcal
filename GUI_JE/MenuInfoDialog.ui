@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>720</width>
+    <height>540</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>20</y>
+     <x>50</x>
+     <y>10</y>
      <width>291</width>
      <height>431</height>
     </rect>
@@ -32,565 +32,217 @@
     <pixmap>../../../Downloads/menu.jpg</pixmap>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_18">
+  <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
     <rect>
-     <x>462</x>
-     <y>300</y>
-     <width>138</width>
-     <height>23</height>
+     <x>360</x>
+     <y>10</y>
+     <width>331</width>
+     <height>341</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-     <underline>false</underline>
-     <strikeout>false</strikeout>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="text">
-    <string>Calrories</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-   </property>
-   <property name="dragEnabled">
-    <bool>false</bool>
-   </property>
-   <property name="readOnly">
+   <property name="widgetResizable">
     <bool>true</bool>
    </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_17">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>300</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-     <underline>false</underline>
-     <strikeout>false</strikeout>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="text">
-    <string>Food Name 5</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-   </property>
-   <property name="dragEnabled">
-    <bool>false</bool>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_6">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>120</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Kimchi jjigae</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_7">
-   <property name="geometry">
-    <rect>
-     <x>462</x>
-     <y>120</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>638 kcal</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_19">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>330</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Kimchi jjigae</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_20">
-   <property name="geometry">
-    <rect>
-     <x>462</x>
-     <y>330</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>638 kcal</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_10">
-   <property name="geometry">
-    <rect>
-     <x>462</x>
-     <y>190</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>638 kcal</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_9">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>190</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Kimchi jjigae</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_4">
-   <property name="geometry">
-    <rect>
-     <x>321</x>
-     <y>50</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Kimchi jjigae</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_5">
-   <property name="geometry">
-    <rect>
-     <x>463</x>
-     <y>50</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>638 kcal</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_11">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>160</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-     <underline>false</underline>
-     <strikeout>false</strikeout>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="text">
-    <string>Food Name 3</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-   </property>
-   <property name="dragEnabled">
-    <bool>false</bool>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_12">
-   <property name="geometry">
-    <rect>
-     <x>462</x>
-     <y>160</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-     <underline>false</underline>
-     <strikeout>false</strikeout>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="text">
-    <string>Calrories</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-   </property>
-   <property name="dragEnabled">
-    <bool>false</bool>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_8">
-   <property name="geometry">
-    <rect>
-     <x>462</x>
-     <y>90</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-     <underline>false</underline>
-     <strikeout>false</strikeout>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="text">
-    <string>Calrories</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-   </property>
-   <property name="dragEnabled">
-    <bool>false</bool>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>90</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-     <underline>false</underline>
-     <strikeout>false</strikeout>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="text">
-    <string>Food Name 2</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-   </property>
-   <property name="dragEnabled">
-    <bool>false</bool>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_16">
-   <property name="geometry">
-    <rect>
-     <x>462</x>
-     <y>230</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-     <underline>false</underline>
-     <strikeout>false</strikeout>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="text">
-    <string>Calrories</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-   </property>
-   <property name="dragEnabled">
-    <bool>false</bool>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_15">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>230</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-     <underline>false</underline>
-     <strikeout>false</strikeout>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="text">
-    <string>Food Name 4</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-   </property>
-   <property name="dragEnabled">
-    <bool>false</bool>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit">
-   <property name="geometry">
-    <rect>
-     <x>321</x>
-     <y>20</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-     <underline>false</underline>
-     <strikeout>false</strikeout>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="text">
-    <string>Food Name 1</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-   </property>
-   <property name="dragEnabled">
-    <bool>false</bool>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_3">
-   <property name="geometry">
-    <rect>
-     <x>463</x>
-     <y>20</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-     <underline>false</underline>
-     <strikeout>false</strikeout>
-     <kerning>true</kerning>
-    </font>
-   </property>
-   <property name="text">
-    <string>Calrories</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-   </property>
-   <property name="dragEnabled">
-    <bool>false</bool>
-   </property>
-   <property name="readOnly">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_13">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>260</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Kimchi jjigae</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_14">
-   <property name="geometry">
-    <rect>
-     <x>462</x>
-     <y>260</y>
-     <width>138</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>638 kcal</string>
-   </property>
-   <property name="frame">
-    <bool>false</bool>
-   </property>
+   <widget class="QWidget" name="scrollAreaWidgetContents">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>315</width>
+      <height>3000</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>3000</height>
+     </size>
+    </property>
+    <widget class="QLineEdit" name="date">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>181</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>2023/11/24   12:08</string>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>29</y>
+       <width>311</width>
+       <height>3001</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QFrame" name="food_frame">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>301</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLineEdit" name="title_food_name">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>4</y>
+         <width>100</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Food Name</string>
+       </property>
+       <property name="frame">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       </property>
+       <property name="dragEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="title_calories">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>27</y>
+         <width>100</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+         <italic>false</italic>
+         <bold>true</bold>
+         <underline>false</underline>
+         <strikeout>false</strikeout>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="text">
+        <string>Calories</string>
+       </property>
+       <property name="frame">
+        <bool>false</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       </property>
+       <property name="dragEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="food_name">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>4</y>
+         <width>120</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Kimchi jjigae</string>
+       </property>
+       <property name="frame">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="select_button">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>16</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(200,200,200);
+border-radius:5px</string>
+       </property>
+       <property name="text">
+        <string>Select</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="calories">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>28</y>
+         <width>120</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>612kcal</string>
+       </property>
+       <property name="frame">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources/>

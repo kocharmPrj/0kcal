@@ -24,13 +24,13 @@ class Ui_MenuInfoDialog(object):
         self.tmpMatInDialog = None
 
         if pic is not None:
-            print("pic is not None in abstract")
             self.tmpPicInDialog = pic
         else:
             print("empty!")
 
         self.count = 2
-        self.nutrition_info = (("406","147.8","46.4","26.4","4.6","3.2"),("450","144","16.4","16.4","2.6","5.2"))
+
+        self.database = (("kimchi jjigae","300","10","20","30","40","50","60"), ("galbi","200","11","21","31","41","51","61"))
 
     def setImageLabel(self, pic):
         return self.label.setPixmap(pic)
@@ -103,17 +103,17 @@ class Ui_MenuInfoDialog(object):
     def selectButtonTo(self, x):
         _translate = QtCore.QCoreApplication.translate
         item = self.nutrition_table.item(0, 0)
-        item.setText(_translate("FoodInfoDialog", self.nutrition_info[x][0]))
+        item.setText(_translate("FoodInfoDialog", self.database[x][2]))
         item = self.nutrition_table.item(0, 1)
-        item.setText(_translate("FoodInfoDialog", self.nutrition_info[x][1]))
+        item.setText(_translate("FoodInfoDialog", self.database[x][3]))
         item = self.nutrition_table.item(0, 2)
-        item.setText(_translate("FoodInfoDialog", self.nutrition_info[x][2]))
+        item.setText(_translate("FoodInfoDialog", self.database[x][4]))
         item = self.nutrition_table2.item(0, 0)
-        item.setText(_translate("FoodInfoDialog", self.nutrition_info[x][3]))
+        item.setText(_translate("FoodInfoDialog", self.database[x][5]))
         item = self.nutrition_table2.item(0, 1)
-        item.setText(_translate("FoodInfoDialog", self.nutrition_info[x][4]))
+        item.setText(_translate("FoodInfoDialog", self.database[x][6]))
         item = self.nutrition_table2.item(0, 2)
-        item.setText(_translate("FoodInfoDialog", self.nutrition_info[x][5]))
+        item.setText(_translate("FoodInfoDialog", self.database[x][7]))
 
 
     def setupUi(self, MenuInfoDialog):
@@ -244,11 +244,23 @@ class Ui_MenuInfoDialog(object):
         item.setText(_translate("FoodInfoDialog", "Sugar[g]"))
         item = self.nutrition_table2.horizontalHeaderItem(2)
         item.setText(_translate("FoodInfoDialog", "Sodium[g]"))
+        item = self.nutrition_table.item(0, 0)
+        item.setText(_translate("FoodInfoDialog", "0"))
+        item = self.nutrition_table.item(0, 1)
+        item.setText(_translate("FoodInfoDialog", "0"))
+        item = self.nutrition_table.item(0, 2)
+        item.setText(_translate("FoodInfoDialog", "0"))
+        item = self.nutrition_table2.item(0, 0)
+        item.setText(_translate("FoodInfoDialog", "0"))
+        item = self.nutrition_table2.item(0, 1)
+        item.setText(_translate("FoodInfoDialog", "0"))
+        item = self.nutrition_table2.item(0, 2)
+        item.setText(_translate("FoodInfoDialog", "0"))
         self.nutrition.setText(_translate("FoodInfoDialog", "Nutritional Information"))
 
         for i in range(self.count):
-            self.food_name_list[i].setText(_translate("MenuInfoDialog", "Kimchi jjigae"))
-            self.calories_list[i].setText(_translate("MenuInfoDialog", "612kcal"))
+            self.food_name_list[i].setText(_translate("MenuInfoDialog", self.database[i][0]))
+            self.calories_list[i].setText(_translate("MenuInfoDialog", self.database[i][2]))
 
 
 if __name__ == "__main__":
