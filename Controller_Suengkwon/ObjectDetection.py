@@ -44,7 +44,7 @@ class ObjectDetector:
             x_min, y_min, x_max, y_max, score = detection
             class_id = str(class_ids[0][i])
 
-            if score > 0.3 and class_id in self.labels:
+            if score > 0.5 and class_id in self.labels:
                 x_min, y_min, x_max, y_max = map(int, [x_min, y_min, x_max, y_max])
                 label_name = self.labels[class_id]["name"]
                 color = self.labels[class_id]["color"]
