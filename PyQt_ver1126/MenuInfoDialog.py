@@ -37,7 +37,7 @@ class Ui_MenuInfoDialog(object):
 
     def chgData(self, foodList):
         self.count = len(foodList)
-        print("foodList:", foodList)
+        # print("foodList:", foodList)
         self.database = []
         for i, elem in enumerate(foodList):
             tmpList = []
@@ -51,7 +51,7 @@ class Ui_MenuInfoDialog(object):
             tmpList.append(elem['sodium'])
             tmpList.append(0)  # chk For select Clicked
             self.database.append(tmpList)
-        print("database:", self.database)
+        # print("database:", self.database)
 
     def setImageLabel(self, pic):
         return self.label.setPixmap(pic)
