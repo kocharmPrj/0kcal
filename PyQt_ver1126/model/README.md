@@ -1,16 +1,18 @@
-# Text Classification
+# Object detection & Text classification
+
+## 1. Text Classification
 Text 분류모델 training 결과
 
-## Dataset
+### Dataset
 Each alphabet(a~z) 500, total 13,000.
 
-### Add font data
+#### Add font data
 사용할 폰트 데이터 100개씩 추가 (a~z)
 
-### Full data
+#### Full data
 다운로드 받은 a~z data 전부 사용 총 ( 213,848개)
 
-## Training 결과
+### Training 결과
 |Classification model|Accuracy|Batch size|epoch|기타
 |----|----|----|----|----|
 |DeiT-Tiny| 0.585|4|5
@@ -30,12 +32,12 @@ Each alphabet(a~z) 500, total 13,000.
 |MobileNet-V3-large-1x| 0.94 | 32|  3| full data
 |MobileNet-V3-large-1x| 0.96 | 32|  14| full data
 
-## 사용 모델 선정
+### 사용 모델 선정
 Dataset Full data
 모델 MobileNet-V3-large-1x
 Batch_size 32, Epoch 14 
 
-### 선정 이유
+#### 선정 이유
 동일 조건으로 여러 모델 train 결과 동일 조건 상에서 MobileNet 성능 우수 확인
 MobileNet 으로 조건 변경해가며 train
 Train 결과 인식률 부족으로 dataset(font data) 추가 후 train
@@ -51,7 +53,7 @@ Train 결과 인식률 부족으로 dataset(font data) 추가 후 train
 알고리즘 개선 후 기존 trained 모델 test
 결과 : 마지막에 사용한 모델 성능 우수 - 해당 모델 선정
 
-### 성능 개선을 위한 노력
+#### 성능 개선을 위한 노력
 1. Dataset 문제
     다운로드 받은 데이터에서 각 알파벳 별로 500개씩의 데이터를 뽑아서 train 
     - 테스트 결과는 좋으나 실제로 사용해본 결과 인식률 낮음
@@ -74,3 +76,36 @@ Train 결과 인식률 부족으로 dataset(font data) 추가 후 train
     - Print된 image로 검사 시 인식률 낮음
     - Test image 수정해가며 print 후 test - 인식률 증가 but 완전한 단어가 나오지 않음
     - 유사성 검사과정 추가 - 단어간 유사도를 비교 후 완전한 단어로 출력 - 결과 우수
+
+## 2. Object Detection 성능 비교
+
+* 데이터 2000개 ( 각 품목당 200개 )
+
+* 품목 리스트 : 조미김, 갈비, 시금치, 잡채, 된장찌개, 밥 , 미역국, 게장, 고등어 구이, 숙주나물
+
+|모델  epoch, batch size | Custom_object_detection_gen3_ATSS |Custom_object_detection_gen3_SSD|Custom_object_detection_gen3_YOLOX|
+|:---:|:---:|:---:|:---:|
+|1/16|mAP: 0.667, Preformace: 0.56|/ |/ |
+|1/32|mAP: 0.357, Preformace: 0.27|/|/|
+|5/32|mAP: 0.801, Preformace: 0.73|/|/|
+|10/32|mAP: 0.828, Preformace: 0.76|/|/|
+|20/32|mAP: 0.843, Preformace: 0.79|/|/|
+|26/32|mAP: 0.845, Preformace: 0.79|mAP: 0.845, Preformace: 0.79|mAP: 0.798, Preformace: 0.79|
+|34/32|/|/|mAP: 0.819, Preformace: 0.8|
+
+mAP : 여러 클래스에 대한 평균 정밀도
+
+
+|각 품목당 최대 인식률(AP)|Custom_object_detection_gen3_ATSS|Custom_object_detection_gen3_SSD|Custom_object_detection_gen3_YOLOX|
+|:---:|:---:|:---:|:---:|
+|조미김|0.97|0.97|0.95|
+|갈비구이|0.41|0.41|0.39|
+|시금치|0.63|0.63|0.64|
+|잡채|1.00|1.00|0.998|
+|된장찌개|0.97|0.97|0.953|
+|밥|0.94|0.94|0.90|
+|미역국|0.99|0.99|1.00|
+|게장|0.67|0.67|0.53|
+|고등어 구이|0.80|0.80|0.79|
+|숙주나물|0.99|0.99|0.97|
+
