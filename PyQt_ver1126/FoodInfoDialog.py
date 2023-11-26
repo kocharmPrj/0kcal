@@ -13,7 +13,7 @@ from PyQt5.QtWidgets import QPushButton, QLabel
 import time
 
 class Ui_FoodInfoDialog(object):
-    def __init__(self, pic=None, mat=None):
+    def __init__(self, pic=None, mat=None, foodList=None):
         super().__init__()
         if pic is None:
             print("empty in food info..")
@@ -43,12 +43,29 @@ class Ui_FoodInfoDialog(object):
 
         self.count = 1
         self.total_nut = [0, 0, 0, 0, 0, 0]
-        self.database = [["kimchi jjigae","300","10","20","30","40","50","60"], ["galbi","200","11","21","31","41","51","61"]]
+        # self.database = [["kimchi jjigae","300","10","20","30","40","50","60"], ["galbi","200","11","21","31","41","51","61"]]
+        self.database = [["kimchi jjigae","300","10","20","30","40","50","60"]]
 
         self.local_db = [[] for _ in range(self.count)]
+        self.chgDatabase(foodList)
 
     def chgDatabase(self, foodList):
-        self.count = foodList
+        self.count = len(foodList)
+
+        self.database = []
+        for i, elem in enumerate(foodList):
+            tmpList = []
+            tmpList.append(str(elem['food_name']))
+            tmpList.append(i+1)
+            tmpList.append(elem['calorie'])
+            tmpList.append(elem['carbo'])
+            tmpList.append(elem['protein'])
+            tmpList.append(elem['fat'])
+            tmpList.append(elem['sugar'])
+            tmpList.append(elem['sodium'])
+            tmpList.append(0)  # chk For select Clicked
+            self.database.append(tmpList)
+
         # self.database = for elem in foodList
 
     def setImageLabel(self, pic):
