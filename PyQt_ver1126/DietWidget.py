@@ -9,22 +9,30 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtGui import QPixmap, QImage
+import cv2
 
 class Ui_DietWidget(object):
     def __init__(self):
         self.count = 2
-        self.total_nut = [100, 200, 300, 400, 500, 600]
-        self.database = (("kimchi jjigae","300","10","20","30","40","50","60"), ("galbi","200","11","21","31","41","51","61"))
+        self.total_nut = [0,0,0,0,0,0]
+        self.database = []
+        self.food_img = []
 
     def setData(self, foodInfo: list, foodImg: list):
         # foodInfo : list of list(
         # day(eg.11271618) food_name serving calcorie carbo protein fat sugar sodium imgsize emptyspace) total 11
         # foodImg : list of Mat img
-        print("Ui_DietWidget foodInfo size", len(foodInfo))
-        print("Ui_DietWidget foodInfo size", len(foodInfo[0]))
-        for i in foodInfo[0]:
-            print("Ui_DietWidget foodInfo", i)
+        self.count = len(foodInfo)
+        for i in range(len(foodInfo)):
+            self.temp = []
+            self.food_img.append(foodImg[i])
+            for j in range(len(foodInfo[i])-2):
+                if 3 <= j and j <= 8:
+                    self.total_nut[j-3] += float(foodInfo[i][j])
+                self.temp.append(foodInfo[i][j])
+            self.database.append(self.temp)
+
 
     def setMealFrame(self, addr, x, y):
         meal = QtWidgets.QFrame(self.frame)
@@ -36,10 +44,18 @@ class Ui_DietWidget(object):
         meal_pic = QtWidgets.QLabel(meal)
         meal_pic.setGeometry(QtCore.QRect(20, 10, 241, 191))
         meal_pic.setText("")
-        meal_pic.setPixmap(QtGui.QPixmap(addr))
+
+        height, width, channel = addr.shape
+        bytes_per_line = 3 * width
+        addr = cv2.cvtColor(addr, cv2.COLOR_BGR2RGB)
+        q_image = QImage(addr.data, width, height, bytes_per_line, QImage.Format_RGB888)
+        pixmap = QPixmap.fromImage(q_image)
+        new_pixmap = pixmap.scaled(241,191)
+        meal_pic.setPixmap(QtGui.QPixmap(new_pixmap))
+
         meal_pic.setObjectName("meal_pic")
         meal_name = QtWidgets.QLineEdit(meal)
-        meal_name.setGeometry(QtCore.QRect(290, 45, 141, 21))
+        meal_name.setGeometry(QtCore.QRect(290, 45, 300, 21))
         font = QtGui.QFont()
         font.setPointSize(-1)
         font.setBold(False)
@@ -177,15 +193,18 @@ class Ui_DietWidget(object):
         self.meals_info = []
         self.meals_info2 = []
 
-        self.setMealFrame("../Controller_Suengkwon/image.jpeg", 10, 10)
-        self.setMealFrame("../Controller_Suengkwon/image.jpeg", 10, 230)
+        x = 10
+        for i in range(self.count):
+            if len(self.food_img) == self.count:
+                self.setMealFrame(self.food_img[i], 10, x)
+                x += 220
 
         self.total_info = QtWidgets.QTableWidget(self.centralwidget)
-        self.total_info.setGeometry(QtCore.QRect(68, 600, 722, 75))
+        self.total_info.setGeometry(QtCore.QRect(68, 600, 722, 50))
         self.total_info.setStyleSheet("background-color:rgb(200,200,200);\n")
         self.total_info.setGridStyle(QtCore.Qt.NoPen)
         self.total_info.setWordWrap(True)
-        self.total_info.setRowCount(2)
+        self.total_info.setRowCount(1)
         self.total_info.setColumnCount(6)
         self.total_info.setObjectName("total_info")
 
@@ -228,31 +247,6 @@ class Ui_DietWidget(object):
         self.total_info.verticalHeader().setHighlightSections(True)
         self.total_info.verticalHeader().setMinimumSectionSize(20)
 
-        self.progressBar_cal = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar_cal.setGeometry(QtCore.QRect(75, 646, 110, 24))
-        self.progressBar_cal.setProperty("value", 32)
-        self.progressBar_cal.setObjectName("progressBar_cal")
-        self.progressBar_car = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar_car.setGeometry(QtCore.QRect(195, 646, 110, 24))
-        self.progressBar_car.setProperty("value", 45)
-        self.progressBar_car.setObjectName("progressBar_fat")
-        self.progressBar_pro = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar_pro.setGeometry(QtCore.QRect(315, 646, 110, 24))
-        self.progressBar_pro.setProperty("value", 90)
-        self.progressBar_pro.setObjectName("progressBar_car")
-        self.progressBar_fat = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar_fat.setGeometry(QtCore.QRect(435, 646, 110, 24))
-        self.progressBar_fat.setProperty("value", 75)
-        self.progressBar_fat.setObjectName("progressBar_pro")
-        self.progressBar_sug = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar_sug.setGeometry(QtCore.QRect(555, 646, 110, 24))
-        self.progressBar_sug.setProperty("value", 40)
-        self.progressBar_sug.setObjectName("progressBar_sug")
-        self.progressBar_sod = QtWidgets.QProgressBar(self.centralwidget)
-        self.progressBar_sod.setGeometry(QtCore.QRect(675, 646, 110, 24))
-        self.progressBar_sod.setProperty("value", 55)
-        self.progressBar_sod.setObjectName("progressBar_sod")
-
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(360, 50, 121, 25))
         font = QtGui.QFont()
@@ -261,22 +255,10 @@ class Ui_DietWidget(object):
         self.lineEdit.setFont(font)
         self.lineEdit.setFrame(False)
         self.lineEdit.setObjectName("lineEdit")
-#        self.menuButton = QtWidgets.QPushButton(self.centralwidget)
-#        self.menuButton.setGeometry(QtCore.QRect(80, 63, 27, 22))
-#        self.menuButton.setMinimumSize(QtCore.QSize(0, 0))
-#        self.menuButton.setStyleSheet("border-image:url(\"../Controller_Suengkwon/menu.png\");")
-#        self.menuButton.setText("")
-#        self.menuButton.setObjectName("menuButton")
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.scrollArea.raise_()
         self.total_info.raise_()
-        self.progressBar_fat.raise_()
-        self.progressBar_car.raise_()
-        self.progressBar_pro.raise_()
-        self.progressBar_cal.raise_()
-        self.progressBar_sug.raise_()
-        self.progressBar_sod.raise_()
         self.lineEdit.raise_()
 
         self.retranslateUi(TodayDietWindow)
@@ -313,41 +295,42 @@ class Ui_DietWidget(object):
         item.setText(_translate("TodayDietWindow", str(self.total_nut[5])))
         self.total_info.setSortingEnabled(__sortingEnabled)
 
-        for i in range(self.count):
-            self.meals_name[i].setText(_translate("TodayDietWindow", self.database[i][0]))
-            item = self.meals_info[i].horizontalHeaderItem(0)
-            item.setText(_translate("TodayDietWindow", "Carbo[g]"))
-            item = self.meals_info[i].horizontalHeaderItem(1)
-            item.setText(_translate("TodayDietWindow", "Protein[g]"))
-            item = self.meals_info[i].horizontalHeaderItem(2)
-            item.setText(_translate("TodayDietWindow", "Fat[g]"))
-            __sortingEnabled = self.meals_info[0].isSortingEnabled()
-            self.meals_info[i].setSortingEnabled(False)
-            item = self.meals_info[i].item(0, 0)
-            item.setText(_translate("TodayDietWindow", self.database[i][2]))
-            item = self.meals_info[i].item(0, 1)
-            item.setText(_translate("TodayDietWindow", self.database[i][3]))
-            item = self.meals_info[i].item(0, 2)
-            item.setText(_translate("TodayDietWindow", self.database[i][4]))
+        if self.count == len(self.database):
+            for i in range(self.count):
+                self.meals_time[i].setText(_translate("TodayDietWindow", self.database[i][0][0:2]+" / "\
+                +self.database[i][0][2:4]+"   "+self.database[i][0][4:6]+":"+self.database[i][0][6:8]))
+                self.meals_name[i].setText(_translate("TodayDietWindow", self.database[i][1]))
+                self.meals_vol[i].setText(_translate("TodayDietWindow", self.database[i][2]+" serving"))
+                item = self.meals_info[i].horizontalHeaderItem(0)
+                item.setText(_translate("TodayDietWindow", "Carbo[g]"))
+                item = self.meals_info[i].horizontalHeaderItem(1)
+                item.setText(_translate("TodayDietWindow", "Protein[g]"))
+                item = self.meals_info[i].horizontalHeaderItem(2)
+                item.setText(_translate("TodayDietWindow", "Fat[g]"))
+                __sortingEnabled = self.meals_info[0].isSortingEnabled()
+                self.meals_info[i].setSortingEnabled(False)
+                item = self.meals_info[i].item(0, 0)
+                item.setText(_translate("TodayDietWindow", self.database[i][3]))
+                item = self.meals_info[i].item(0, 1)
+                item.setText(_translate("TodayDietWindow", self.database[i][4]))
+                item = self.meals_info[i].item(0, 2)
+                item.setText(_translate("TodayDietWindow", self.database[i][5]))
 
-            self.meals_info2[i].setSortingEnabled(__sortingEnabled)
-            item = self.meals_info2[i].horizontalHeaderItem(0)
-            item.setText(_translate("TodayDietWindow", "Calories[kcal]"))
-            item = self.meals_info2[i].horizontalHeaderItem(1)
-            item.setText(_translate("TodayDietWindow", "Sugar[g]"))
-            item = self.meals_info2[i].horizontalHeaderItem(2)
-            item.setText(_translate("TodayDietWindow", "Sodium[g]"))
-            __sortingEnabled = self.meals_info2[0].isSortingEnabled()
-            self.meals_info2[i].setSortingEnabled(False)
-            item = self.meals_info2[i].item(0, 0)
-            item.setText(_translate("TodayDietWindow", self.database[i][5]))
-            item = self.meals_info2[i].item(0, 1)
-            item.setText(_translate("TodayDietWindow", self.database[i][6]))
-            item = self.meals_info2[i].item(0, 2)
-            item.setText(_translate("TodayDietWindow", self.database[i][7]))
-            self.meals_info2[i].setSortingEnabled(__sortingEnabled)
-
-            self.meals_vol[i].setText(_translate("TodayDietWindow", self.database[i][1]))
-            self.meals_time[i].setText(_translate("TodayDietWindow", "AM 11:52"))
+                self.meals_info2[i].setSortingEnabled(__sortingEnabled)
+                item = self.meals_info2[i].horizontalHeaderItem(0)
+                item.setText(_translate("TodayDietWindow", "Calories[kcal]"))
+                item = self.meals_info2[i].horizontalHeaderItem(1)
+                item.setText(_translate("TodayDietWindow", "Sugar[g]"))
+                item = self.meals_info2[i].horizontalHeaderItem(2)
+                item.setText(_translate("TodayDietWindow", "Sodium[g]"))
+                __sortingEnabled = self.meals_info2[0].isSortingEnabled()
+                self.meals_info2[i].setSortingEnabled(False)
+                item = self.meals_info2[i].item(0, 0)
+                item.setText(_translate("TodayDietWindow", self.database[i][6]))
+                item = self.meals_info2[i].item(0, 1)
+                item.setText(_translate("TodayDietWindow", self.database[i][7]))
+                item = self.meals_info2[i].item(0, 2)
+                item.setText(_translate("TodayDietWindow", self.database[i][7]))
+                self.meals_info2[i].setSortingEnabled(__sortingEnabled)
 
         self.lineEdit.setText(_translate("TodayDietWindow", "Today\'s Diet"))

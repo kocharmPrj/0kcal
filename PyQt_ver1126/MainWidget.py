@@ -67,7 +67,6 @@ class Ui_MainWidget(object):
         self.label.setGeometry(QtCore.QRect(70, 80, 720, 500))
         self.label.setFrameShape(QtWidgets.QFrame.Box)
         self.label.setText("")
-        # self.label.setPixmap(QtGui.QPixmap("../../../Downloads/jellyfish.jpg"))
         self.label.setObjectName("label")
         self.label.raise_()
         self.frame.raise_()

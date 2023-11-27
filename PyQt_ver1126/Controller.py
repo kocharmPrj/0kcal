@@ -33,7 +33,6 @@ class DietScreen(QWidget):
     def __init__(self):
         super().__init__()
         self.ui = Ui_DietWidget()
-        self.ui.setupUi(self)
 
 
 class GalleryScreen(QWidget):
@@ -125,8 +124,8 @@ class MainWindow(QMainWindow):
             self.msg.exec_()
         else:
             textInFile, imgInFile = returnFile
-            print("INMAIN_switch_diet TEST SUCCESS")
             self.diet_screen.ui.setData(textInFile, imgInFile)
+            self.diet_screen.ui.setupUi(self.diet_screen)
             self.stacked_widget.setCurrentIndex(1)
 
     def switch_gallery(self):
@@ -166,6 +165,7 @@ class MainWindow(QMainWindow):
     def INMAIN_show_menu_dialog(self):
         try:
             menu_model_xml_path = "./model/openvino.xml"
+            self.save_image = self.main_screen.ui.tmpMat
             self._infer = MenuProcessor(
                 self.main_screen.ui.tmpMat,
                 menu_model_xml_path
@@ -198,22 +198,24 @@ class MainWindow(QMainWindow):
         _translate = QtCore.QCoreApplication.translate
 
         # get food list(label_names_list) found on picture frame
-        label_names_list = self._detector.detect_objects(self.main_screen.ui.tmpMat)
+        self.tmpImgSave = self.main_screen.ui.tmpMat
+        label_names_list = self._detector.detect_objects(self.tmpImgSave)
 
         # get food info of food list
         foodList = []
         for elem in label_names_list:
+            elem = self.modelClass.getHighestSimilarityFoodName(elem)
             foodList.append(self.modelClass.foodInfoRequest(elem))
 
         self._food_dialog = FoodinfoScreen(
             self.main_screen.ui.tmpQPic,
-            self.main_screen.ui.tmpMat,
+            self.tmpImgSave,
             foodList
         )
 
         self._food_dialog.ui.btnToStore.clicked.connect(
             lambda: self.INFOOD_store_food_data(
-                self.main_screen.ui.tmpMat,
+                self.tmpImgSave,
                 ''.join(map(str, self._food_dialog.ui.timeStr)),
                 self._food_dialog.ui.local_db
             )
@@ -221,21 +223,16 @@ class MainWindow(QMainWindow):
         self._food_dialog.ui.btnToCancel.clicked.connect(
             self.INFOOD_cancel_food_dialog
         )
-        print("CONTROLLER len of names_list : ", len(label_names_list))
-        for elem in label_names_list:
-            print("CONTROLLER elem : ", elem)
         for foodName in label_names_list:
             foodList.append(self.modelClass.foodInfoRequest(foodName))
         # self._food_dialog.ui.chgCnt(len(foodList)+1)
-        print("Menu Lists:")
+
         if label_names_list == []:
-            print("No detection food!")
             self.msg.setIcon(QMessageBox.Information)
             self.msg.setWindowTitle("오류 메세지")
             self.msg.setText("   음식이 인식되지 않았습니다!   ")
             self.msg.exec_()
         else:
-            # print(label_names_list)
             time = self._food_dialog.ui.timeList
             strTime = '{:4d}/{:2d}/{:2d} {:2d}:{:2d}'.format(
                 time[0], time[1], time[2], time[3], time[4]
