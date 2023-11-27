@@ -28,17 +28,20 @@ class MainScreen(QWidget):
         self.ui.pushButton_foodInfo.clicked.connect(parent.INMAIN_show_food_dialog)
         self.ui.pushButton_menuInfo.clicked.connect(parent.INMAIN_show_menu_dialog)
 
+
 class DietScreen(QWidget):
     def __init__(self):
         super().__init__()
         self.ui = Ui_DietWidget()
         self.ui.setupUi(self)
 
+
 class GalleryScreen(QWidget):
     def __init__(self):
         super().__init__()
         self.ui = Ui_DietWidget()
         self.ui.setupUi(self)
+
 
 class FoodinfoScreen(QDialog):
     def __init__(self, pic, mat, foodList):
@@ -54,12 +57,13 @@ class FoodinfoScreen(QDialog):
                 partial(self.ui.selectButtonTo, i)
             )
 
+
 class MenuInfoScreen(QDialog):
     def __init__(self, pic, mat, foodList):
         super().__init__()
         self.ui = Ui_MenuInfoDialog(pic, mat, foodList)
         self.ui.setupUi(self)
-        self.ui.tmpPicInDialog = self.ui.tmpPicInDialog.scaled(659,668)
+        self.ui.tmpPicInDialog = self.ui.tmpPicInDialog.scaled(659, 668)
         self.ui.label.setPixmap(self.ui.tmpPicInDialog)
 
         # Add Button
@@ -67,6 +71,7 @@ class MenuInfoScreen(QDialog):
             self.ui.select_button_list[i].clicked.connect(
                 partial(self.ui.selectButtonTo, i)
             )
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -195,8 +200,8 @@ class MainWindow(QMainWindow):
         self._food_dialog.ui.btnToStore.clicked.connect(
             lambda: self.INFOOD_store_food_data(
                 self.main_screen.ui.tmpMat,
-                ''.join(map(str, self._food_dialog.ui.timeList)),
-                self._food_dialog.ui.database
+                ''.join(map(str, self._food_dialog.ui.timeStr)),
+                self._food_dialog.ui.local_db
             )
         )
         self._food_dialog.ui.btnToCancel.clicked.connect(

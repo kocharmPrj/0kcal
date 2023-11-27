@@ -6,8 +6,8 @@ import numpy as np
 import requests
 import json
 from difflib import SequenceMatcher
-from PySide2.QtGui import QPixmap
-from PySide2.QtCore import QByteArray, QBuffer, QIODevice
+from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import QByteArray, QBuffer, QIODevice
 
 
 class Model:
@@ -17,7 +17,7 @@ class Model:
         self.f_img = None
 
     # get pix, time, foodData and store it into ./data/
-    def storeFoodData(self, qPixmapData: QPixmap, timeString: str, foodData: dict) -> None:
+    def storeFoodData(self, qPixmapData: QPixmap, timeString: str, foodData: list) -> None:
         print(f"timeString : {timeString}")
         current_date = timeString[:4]
         try:
@@ -47,9 +47,11 @@ class Model:
                 # write data into f
                 self.f_etc.write(timeString)
                 self.f_etc.write(' ')
-                for i in foodData:
-                    self.f_etc.writelines(str(i))
-                    self.f_etc.write(' ')
+                for j in foodData:
+                    for i in j:
+                        print("MODEL", str(i))
+                        self.f_etc.write(str(i))
+                        self.f_etc.write(' ')
                 self.f_etc.write('\n')
                 self.f_etc.close()
 
@@ -59,8 +61,8 @@ class Model:
                 while bytesWritten < imgSize:
                     tmpBufForImgWrite = binImg[bytesWritten:bytesWritten+bufSizeForImgWrite]
                     # print(str(tmpBufForImgWrite))
-                    print("try write")
-                    print(str(self.f_img))
+                    # print("try write")
+                    # print(str(self.f_img))
                     try:
                         self.f_img.write(tmpBufForImgWrite)
                     except Exception as e:
