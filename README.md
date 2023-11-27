@@ -37,7 +37,12 @@ python Controller.py
 
 ## Output
 
+![image](https://github.com/kocharmPrj/0kcal/assets/142784142/0583c5d9-76e2-48a5-9617-98d67b905cd1)
 ![image](https://github.com/kocharmPrj/0kcal/assets/142784142/e08476bd-3d3e-46c7-8309-1bde57f53431)
+![image](https://github.com/kocharmPrj/0kcal/assets/142784142/50101ff9-ef00-4fb1-9775-b8061a1aa599)
+![image](https://github.com/kocharmPrj/0kcal/assets/142784142/efc40c1f-78f7-4165-9153-4e4936fe3fe3)
+
+
 
 
 ## Appendix
