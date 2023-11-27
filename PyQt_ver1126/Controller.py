@@ -124,6 +124,7 @@ class MainWindow(QMainWindow):
             self.msg.exec_()
         else:
             textInFile, imgInFile = returnFile
+            print(textInFile)
             self.diet_screen.ui.setData(textInFile, imgInFile)
             self.diet_screen.ui.setupUi(self.diet_screen)
             self.stacked_widget.setCurrentIndex(1)

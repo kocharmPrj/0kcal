@@ -24,6 +24,8 @@ class Ui_DietWidget(object):
         # day(eg.11271618) food_name serving calcorie carbo protein fat sugar sodium imgsize emptyspace) total 11
         # foodImg : list of Mat img
         self.count = len(foodInfo)
+        self.database = []
+        self.food_img = []
         for i in range(len(foodInfo)):
             self.temp = []
             self.food_img.append(foodImg[i])
@@ -175,11 +177,11 @@ class Ui_DietWidget(object):
         self.scrollArea.setStyleSheet("background-color:rgb(230,230,230);\n")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -2, 696, 500))
-        self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 600))
+        self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 2000))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.frame = QtWidgets.QFrame(self.scrollAreaWidgetContents)
-        self.frame.setGeometry(QtCore.QRect(0, 0, 700, 3000))
-        self.frame.setMinimumSize(QtCore.QSize(0, 3000))
+        self.frame.setGeometry(QtCore.QRect(0, 0, 700, 2000))
+        self.frame.setMinimumSize(QtCore.QSize(0, 500))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
