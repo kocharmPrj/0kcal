@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QPushButton, QLabel 
+from PyQt5.QtWidgets import QPushButton, QLabel
 import time
 
 class Ui_FoodInfoDialog(object):
@@ -56,7 +56,7 @@ class Ui_FoodInfoDialog(object):
         for i, elem in enumerate(foodList):
             tmpList = []
             tmpList.append(str(elem['food_name']))
-            tmpList.append(i+1)
+            tmpList.append(1)
             tmpList.append(elem['calorie'])
             tmpList.append(elem['carbo'])
             tmpList.append(elem['protein'])
@@ -109,6 +109,8 @@ class Ui_FoodInfoDialog(object):
         food_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         food_frame.setFrameShadow(QtWidgets.QFrame.Raised)
         food_frame.setObjectName("food_frame")
+        food_frame.setStyleSheet("background-color:rgb(50,170,170);\n"
+        "border-radius:5px")
         title_food_name = QtWidgets.QLineEdit(food_frame)
         title_food_name.setGeometry(QtCore.QRect(10, 10, 100, 20))
         font = QtGui.QFont()
@@ -120,6 +122,7 @@ class Ui_FoodInfoDialog(object):
         title_food_name.setDragEnabled(False)
         title_food_name.setReadOnly(True)
         title_food_name.setObjectName("title_food_name")
+        title_food_name.setStyleSheet("color:white;\n")
         title_volumn = QtWidgets.QLineEdit(food_frame)
         title_volumn.setGeometry(QtCore.QRect(10, 40, 100, 20))
         font = QtGui.QFont()
@@ -135,6 +138,7 @@ class Ui_FoodInfoDialog(object):
         title_volumn.setDragEnabled(False)
         title_volumn.setReadOnly(True)
         title_volumn.setObjectName("title_volumn")
+        title_volumn.setStyleSheet("color:white;\n")
         food_name = QtWidgets.QLineEdit(food_frame)
         food_name.setGeometry(QtCore.QRect(110, 10, 120, 20))
         font = QtGui.QFont()
@@ -142,6 +146,7 @@ class Ui_FoodInfoDialog(object):
         food_name.setFont(font)
         food_name.setFrame(False)
         food_name.setObjectName("food_name")
+        food_name.setStyleSheet("color:white;\n")
 
         volumn = QtWidgets.QComboBox(food_frame)
         volumn.setGeometry(QtCore.QRect(110, 40, 111, 20))
@@ -150,19 +155,23 @@ class Ui_FoodInfoDialog(object):
         volumn.addItem("")
         volumn.addItem("")
         volumn.setCurrentIndex(1)
+        volumn.setStyleSheet("background-color:white;\n"
+        "border-radius:2px;\n"
+        "color:black;")
 
         select_button = QtWidgets.QPushButton(food_frame)
         select_button.setGeometry(QtCore.QRect(178, 68, 51, 21))
         font = QtGui.QFont()
         font.setPointSize(8)
         select_button.setFont(font)
-        select_button.setStyleSheet("background-color:rgb(200,200,200);\n"
+        select_button.setStyleSheet("background-color:white;\n"
         "border-radius:5px")
         select_button.setObjectName("select_button")
 
         _translate = QtCore.QCoreApplication.translate
         title_food_name.setText(_translate("FoodInfoDialog", "Food Name"))
         title_volumn.setText(_translate("FoodInfoDialog", "Volumn"))
+
 
         self.food_name_list.append(food_name)
         self.volumn_list.append(volumn)
@@ -171,10 +180,11 @@ class Ui_FoodInfoDialog(object):
     def setupUi(self, FoodInfoDialog):
         FoodInfoDialog.setObjectName("FoodInfoDialog")
         FoodInfoDialog.resize(720, 540)
+        FoodInfoDialog.setStyleSheet("background-color:rgb(230,255,250);\n")
         self.currentTime = QLabel(' '.join(self.time_str))
 
         self.picture = QtWidgets.QLabel(FoodInfoDialog)
-        self.picture.setGeometry(QtCore.QRect(40, 30, 362, 320))
+        self.picture.setGeometry(QtCore.QRect(40, 40, 362, 310))
         self.picture.setText("")
         self.picture.setTextFormat(QtCore.Qt.PlainText)
         self.picture.setObjectName("picture")
@@ -187,7 +197,8 @@ class Ui_FoodInfoDialog(object):
 
         self.nutrition_table = QtWidgets.QTableWidget(self.nutrition_frame)
         self.nutrition_table.setGeometry(QtCore.QRect(0, 0, 362, 50))
-        self.nutrition_table.setStyleSheet("background-color:rgb(100, 150, 255);")
+        self.nutrition_table.setStyleSheet("background-color:rgb(50,150,150);\n"
+        "color:white;")
         self.nutrition_table.setGridStyle(QtCore.Qt.NoPen)
         self.nutrition_table.setWordWrap(True)
         self.nutrition_table.setRowCount(1)
@@ -217,7 +228,8 @@ class Ui_FoodInfoDialog(object):
         self.nutrition_table.verticalHeader().setMinimumSectionSize(20)
         self.nutrition_table2 = QtWidgets.QTableWidget(self.nutrition_frame)
         self.nutrition_table2.setGeometry(QtCore.QRect(0, 50, 362, 50))
-        self.nutrition_table2.setStyleSheet("background-color:rgb(100, 150, 255);")
+        self.nutrition_table2.setStyleSheet("background-color:rgb(50,150,150);\n"
+        "color:white;")
         self.nutrition_table2.setGridStyle(QtCore.Qt.NoPen)
         self.nutrition_table2.setWordWrap(True)
         self.nutrition_table2.setRowCount(1)
@@ -265,6 +277,9 @@ class Ui_FoodInfoDialog(object):
         self.scrollArea.setGeometry(QtCore.QRect(410, 40, 275, 450))
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
+        self.scrollArea.setStyleSheet("background-color:white;\n"
+        "border-radius:5px;\n"
+        "border-color:rgb(225,255,235);\n")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 259, 3000))
         self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 3000))
@@ -281,7 +296,6 @@ class Ui_FoodInfoDialog(object):
         self.frame.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
-
         self.food_name_list = []
         self.volumn_list = []
         self.select_button_list = []
@@ -319,17 +333,14 @@ class Ui_FoodInfoDialog(object):
         for i in range(self.count):
             self.food_name_list[i].setText(_translate("FoodInfoDialog", self.database[i][0]))
             self.local_db[i].append(self.database[i][0])
-            self.volumn1 = str(int(float(self.database[i][1])/2))
-            self.volumn2 = self.database[i][1]
-            self.volumn3 = str(int(float(self.database[i][1])*1.5))
-            self.local_db[i].append(self.volumn2)
+            self.local_db[i].append("1")
             vol_change = [0.5, 1, 1.5]
             for j in range(6):
                 self.local_db[i].append(float(self.database[i][j+2])*vol_change[self.volumn_list[i].currentIndex()])
                 self.total_nut[j] += float(self.database[i][j+2])*vol_change[self.volumn_list[i].currentIndex()]
-            self.volumn_list[i].setItemText(0, _translate("FoodInfoDialog", self.volumn1))
-            self.volumn_list[i].setItemText(1, _translate("FoodInfoDialog", self.volumn2))
-            self.volumn_list[i].setItemText(2, _translate("FoodInfoDialog", self.volumn3))
+            self.volumn_list[i].setItemText(0, _translate("FoodInfoDialog", "0.5 serving"))
+            self.volumn_list[i].setItemText(1, _translate("FoodInfoDialog", "1 serving"))
+            self.volumn_list[i].setItemText(2, _translate("FoodInfoDialog", "1.5 serving"))
             self.select_button_list[i].setText(_translate("FoodInfoDialog", "Select"))
 
         item = self.nutrition_table.item(0, 0)

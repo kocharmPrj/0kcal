@@ -21,9 +21,10 @@ class Ui_DietWidget(object):
     def setMealFrame(self, addr, x, y):
         meal = QtWidgets.QFrame(self.frame)
         meal.setGeometry(QtCore.QRect(x, y, 671, 211))
-        meal.setFrameShape(QtWidgets.QFrame.NoFrame)
         meal.setFrameShadow(QtWidgets.QFrame.Raised)
         meal.setObjectName("meal")
+        meal.setStyleSheet("background-color:white;\n"
+        "border-radius:5px;\n")
         meal_pic = QtWidgets.QLabel(meal)
         meal_pic.setGeometry(QtCore.QRect(20, 10, 241, 191))
         meal_pic.setText("")
@@ -40,7 +41,9 @@ class Ui_DietWidget(object):
         meal_name.setObjectName("meal_name")
         meal_info = QtWidgets.QTableWidget(meal)
         meal_info.setGeometry(QtCore.QRect(290, 100, 362, 51))
-        meal_info.setStyleSheet("background-color:rgb(100, 150, 255);")
+        meal_info.setStyleSheet("background-color:rgb(50,150,150);"
+        "border-radius:1px;\n"
+        "color:white;")
         meal_info.setGridStyle(QtCore.Qt.NoPen)
         meal_info.setWordWrap(True)
         meal_info.setRowCount(1)
@@ -70,7 +73,9 @@ class Ui_DietWidget(object):
         meal_info.verticalHeader().setMinimumSectionSize(20)
         meal_info2 = QtWidgets.QTableWidget(meal)
         meal_info2.setGeometry(QtCore.QRect(290, 150, 362, 51))
-        meal_info2.setStyleSheet("background-color:rgb(100, 150, 255);")
+        meal_info2.setStyleSheet("background-color:rgb(50,150,150);"
+        "border-radius:1px;\n"
+        "color:white;")
         meal_info2.setGridStyle(QtCore.Qt.NoPen)
         meal_info2.setWordWrap(True)
         meal_info2.setRowCount(1)
@@ -106,7 +111,7 @@ class Ui_DietWidget(object):
         meal_vol.setFrame(False)
         meal_vol.setObjectName("meal_vol")
         meal_time = QtWidgets.QLineEdit(meal)
-        meal_time.setGeometry(QtCore.QRect(380, 14, 81, 20))
+        meal_time.setGeometry(QtCore.QRect(290, 14, 81, 20))
         font = QtGui.QFont()
         font.setPointSize(-1)
         font.setBold(False)
@@ -114,17 +119,12 @@ class Ui_DietWidget(object):
         meal_time.setStyleSheet("font-size:12px;")
         meal_time.setFrame(False)
         meal_time.setObjectName("meal_time")
-        meal_is = QtWidgets.QLineEdit(meal)
-        meal_is.setGeometry(QtCore.QRect(290, 10, 71, 25))
+
         font = QtGui.QFont()
         font.setPointSize(-1)
         font.setBold(True)
-        meal_is.setFont(font)
-        meal_is.setStyleSheet("font-size:18px;")
-        meal_is.setFrame(False)
-        meal_is.setObjectName("meal_is")
+
         self.meals_pic.append(meal_pic)
-        self.meals_is.append(meal_is)
         self.meals_name.append(meal_name)
         self.meals_time.append(meal_time)
         self.meals_vol.append(meal_vol)
@@ -148,6 +148,7 @@ class Ui_DietWidget(object):
         self.scrollArea.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
+        self.scrollArea.setStyleSheet("background-color:rgb(230,230,230);\n")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -2, 696, 500))
         self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 600))
@@ -173,7 +174,7 @@ class Ui_DietWidget(object):
 
         self.total_info = QtWidgets.QTableWidget(self.centralwidget)
         self.total_info.setGeometry(QtCore.QRect(68, 600, 722, 75))
-        self.total_info.setStyleSheet("background-color:rgb(200, 230, 255);")
+        self.total_info.setStyleSheet("background-color:rgb(200,200,200);\n")
         self.total_info.setGridStyle(QtCore.Qt.NoPen)
         self.total_info.setWordWrap(True)
         self.total_info.setRowCount(2)
@@ -340,7 +341,6 @@ class Ui_DietWidget(object):
 
             self.meals_vol[i].setText(_translate("TodayDietWindow", self.database[i][1]))
             self.meals_time[i].setText(_translate("TodayDietWindow", "AM 11:52"))
-            self.meals_is[i].setText(_translate("TodayDietWindow", "Lunch"))
 
         self.lineEdit.setText(_translate("TodayDietWindow", "Today\'s Diet"))
 

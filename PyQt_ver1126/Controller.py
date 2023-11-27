@@ -45,7 +45,7 @@ class FoodinfoScreen(QDialog):
         super().__init__()
         self.ui = Ui_FoodInfoDialog(pic, mat, foodList)
         self.ui.setupUi(self)
-        self.ui.tmpPicInDialog = self.ui.tmpPicInDialog.scaled(360, 300)
+        self.ui.tmpPicInDialog = self.ui.tmpPicInDialog.scaled(360, 310)
         self.ui.picture.setPixmap(self.ui.tmpPicInDialog)
 
         # Add Button
@@ -59,7 +59,7 @@ class MenuInfoScreen(QDialog):
         super().__init__()
         self.ui = Ui_MenuInfoDialog(pic, mat, foodList)
         self.ui.setupUi(self)
-        self.ui.tmpPicInDialog = self.ui.tmpPicInDialog.scaled(659,668)
+        self.ui.tmpPicInDialog = self.ui.tmpPicInDialog.scaled(530, 470)
         self.ui.label.setPixmap(self.ui.tmpPicInDialog)
 
         # Add Button
@@ -115,7 +115,10 @@ class MainWindow(QMainWindow):
         self.stacked_widget.setCurrentIndex(1)
 
     def switch_gallery(self):
-        self.stacked_widget.setCurrentIndex(2)
+        self.msg.setIcon(QMessageBox.Information)
+        self.msg.setWindowTitle("오류 메세지")
+        self.msg.setText("   To be continue...   ")
+        self.msg.exec_()
 
     def popup_food(self):
         self.foodinfo_screen.setWindowTitle('Dialog')
@@ -172,7 +175,7 @@ class MainWindow(QMainWindow):
         # if can't read menu board
         except Exception as e:
             self.msg.setIcon(QMessageBox.Information)
-            self.msg.setWindowTitle("오류 메세지", e)
+            self.msg.setWindowTitle("오류 메세지")
             self.msg.setText("   메뉴가 인식되지 않았습니다!   ")
             self.msg.exec_()
 

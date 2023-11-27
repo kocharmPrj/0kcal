@@ -69,6 +69,8 @@ class Ui_MenuInfoDialog(object):
         food_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         food_frame.setFrameShadow(QtWidgets.QFrame.Raised)
         food_frame.setObjectName("food_frame")
+        food_frame.setStyleSheet("background-color:rgb(50,170,170);\n"
+        "border-radius:5px")
         title_food_name = QtWidgets.QLineEdit(food_frame)
         title_food_name.setGeometry(QtCore.QRect(10, 4, 100, 20))
         font = QtGui.QFont()
@@ -80,8 +82,10 @@ class Ui_MenuInfoDialog(object):
         title_food_name.setDragEnabled(False)
         title_food_name.setReadOnly(True)
         title_food_name.setObjectName("title_food_name")
+        title_food_name.setStyleSheet("color:white;\n")
         title_calories = QtWidgets.QLineEdit(food_frame)
         title_calories.setGeometry(QtCore.QRect(10, 27, 100, 20))
+        title_calories.setStyleSheet("color:white;\n")
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
@@ -98,12 +102,13 @@ class Ui_MenuInfoDialog(object):
         food_name.setFont(font)
         food_name.setFrame(False)
         food_name.setObjectName("food_name")
+        food_name.setStyleSheet("color:white;\n")
         select_button = QtWidgets.QPushButton(food_frame)
         select_button.setGeometry(QtCore.QRect(240, 16, 51, 21))
         font = QtGui.QFont()
         font.setPointSize(8)
         select_button.setFont(font)
-        select_button.setStyleSheet("background-color:rgb(200,200,200);\n"
+        select_button.setStyleSheet("background-color:white;\n"
         "border-radius:5px")
         select_button.setObjectName("select_button")
         calories = QtWidgets.QLineEdit(food_frame)
@@ -113,6 +118,7 @@ class Ui_MenuInfoDialog(object):
         calories.setFont(font)
         calories.setFrame(False)
         calories.setObjectName("calories")
+        calories.setStyleSheet("color:white;\n")
 
         _translate = QtCore.QCoreApplication.translate
         title_food_name.setText(_translate("MenuInfoDialog", "Food Name"))
@@ -145,17 +151,21 @@ class Ui_MenuInfoDialog(object):
 
     def setupUi(self, MenuInfoDialog):
         MenuInfoDialog.setObjectName("MenuInfoDialog")
-        MenuInfoDialog.resize(720, 540)
+        MenuInfoDialog.resize(890, 540)
+        MenuInfoDialog.setStyleSheet("background-color:rgb(230,255,250);\n")
         self.label = QtWidgets.QLabel(MenuInfoDialog)
-        self.label.setGeometry(QtCore.QRect(40, 30, 300, 470))
+        self.label.setGeometry(QtCore.QRect(30, 30, 500, 470))
         self.label.setText("")
         self.label.setTextFormat(QtCore.Qt.PlainText)
         # self.label.setPixmap(QtGui.QPixmap("../../../Downloads/menu.jpg"))
         self.label.setObjectName("label")
         self.scrollArea = QtWidgets.QScrollArea(MenuInfoDialog)
-        self.scrollArea.setGeometry(QtCore.QRect(360, 30, 331, 340))
+        self.scrollArea.setGeometry(QtCore.QRect(540, 30, 331, 330))
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
+        self.scrollArea.setStyleSheet("background-color:white;\n"
+        "border-radius:5px;\n"
+        "border-color:rgb(225,255,235);\n")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 315, 3000))
         self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 3000))
@@ -179,14 +189,15 @@ class Ui_MenuInfoDialog(object):
 
 
         self.nutrition_frame = QtWidgets.QFrame(MenuInfoDialog)
-        self.nutrition_frame.setGeometry(QtCore.QRect(360, 400, 332, 100))
+        self.nutrition_frame.setGeometry(QtCore.QRect(540, 400, 332, 100))
         self.nutrition_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.nutrition_frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.nutrition_frame.setObjectName("nutrition_frame")
 
         self.nutrition_table = QtWidgets.QTableWidget(self.nutrition_frame)
         self.nutrition_table.setGeometry(QtCore.QRect(0, 0, 332, 50))
-        self.nutrition_table.setStyleSheet("background-color:rgb(100, 150, 255);")
+        self.nutrition_table.setStyleSheet("background-color:rgb(50,150,150);\n"
+        "color:white;")
         self.nutrition_table.setGridStyle(QtCore.Qt.NoPen)
         self.nutrition_table.setWordWrap(True)
         self.nutrition_table.setRowCount(1)
@@ -216,7 +227,8 @@ class Ui_MenuInfoDialog(object):
         self.nutrition_table.verticalHeader().setMinimumSectionSize(20)
         self.nutrition_table2 = QtWidgets.QTableWidget(self.nutrition_frame)
         self.nutrition_table2.setGeometry(QtCore.QRect(0, 50, 362, 50))
-        self.nutrition_table2.setStyleSheet("background-color:rgb(100, 150, 255);")
+        self.nutrition_table2.setStyleSheet("background-color:rgb(50,150,150);\n"
+        "color:white;")
         self.nutrition_table2.setGridStyle(QtCore.Qt.NoPen)
         self.nutrition_table2.setWordWrap(True)
         self.nutrition_table2.setRowCount(1)
@@ -245,7 +257,7 @@ class Ui_MenuInfoDialog(object):
         self.nutrition_table2.verticalHeader().setHighlightSections(True)
         self.nutrition_table2.verticalHeader().setMinimumSectionSize(20)
         self.nutrition = QtWidgets.QLineEdit(MenuInfoDialog)
-        self.nutrition.setGeometry(QtCore.QRect(360, 373, 251, 25))
+        self.nutrition.setGeometry(QtCore.QRect(540, 373, 251, 25))
         font = QtGui.QFont()
         font.setPointSize(14)
         font.setBold(True)
