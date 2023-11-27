@@ -17,13 +17,21 @@ class Ui_DietWidget(object):
         self.total_nut = [100, 200, 300, 400, 500, 600]
         self.database = (("kimchi jjigae","300","10","20","30","40","50","60"), ("galbi","200","11","21","31","41","51","61"))
 
+    def setData(self, foodInfo: list, foodImg: list):
+        # foodInfo : list of list(
+        # day(eg.11271618) food_name serving calcorie carbo protein fat sugar sodium imgsize emptyspace) total 11
+        # foodImg : list of Mat img
+        print("Ui_DietWidget foodInfo size", len(foodInfo))
+        print("Ui_DietWidget foodInfo size", len(foodInfo[0]))
+        for i in foodInfo[0]:
+            print("Ui_DietWidget foodInfo", i)
 
     def setMealFrame(self, addr, x, y):
         meal = QtWidgets.QFrame(self.frame)
         meal.setGeometry(QtCore.QRect(x, y, 671, 211))
         meal.setFrameShadow(QtWidgets.QFrame.Raised)
         meal.setObjectName("meal")
-        meal.setStyleSheet("background-color:white;\n"
+        meal.setStyleSheet( "background-color:white;\n"
         "border-radius:5px;\n")
         meal_pic = QtWidgets.QLabel(meal)
         meal_pic.setGeometry(QtCore.QRect(20, 10, 241, 191))
@@ -343,13 +351,3 @@ class Ui_DietWidget(object):
             self.meals_time[i].setText(_translate("TodayDietWindow", "AM 11:52"))
 
         self.lineEdit.setText(_translate("TodayDietWindow", "Today\'s Diet"))
-
-
-#if __name__ == "__main__":
-#    import sys
-#    app = QtWidgets.QApplication(sys.argv)
-#    TodayDietWindow = QtWidgets.QMainWindow()
-#    ui = Ui_TodayDietWindow()
-#    ui.setupUi(TodayDietWindow)
-#    TodayDietWindow.show()
-#    sys.exit(app.exec_())

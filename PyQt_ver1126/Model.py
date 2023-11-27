@@ -1,10 +1,12 @@
 # This Python file uses the following encoding: utf-8
 import os
+import glob
 import platform
 import cv2
 import numpy as np
 import requests
 import json
+import time
 from difflib import SequenceMatcher
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QByteArray, QBuffer, QIODevice
@@ -30,39 +32,30 @@ class Model:
             self.getFilePtr(current_date)
             if self.f_etc is not None and self.f_img is not None:
 
-                '''
-                # convert image type to Qpixmap to bin to store.
-                # +qImage can be saved jpg like qImg.save("title.jpg", "JPG")
-                tmpQImg = QPixmap.toImage(qPixmapData)
-                tmpByteArr = QByteArray()
-                tmpBuffer = QBuffer(tmpByteArr)
-                tmpBuffer.open(QIODevice.WriteOnly)
-                tmpQImg.save(tmpBuffer, "PNG")
-                # get binary data from the buffer
-                binImg = tmpBuffer.data()
-                # print(binImg)
-                '''
                 binImg = cv2.imencode('.jpg', qPixmapData)[1].tobytes()
+
+                # size of binary Img
+                imgSize = len(binImg)
 
                 # write data into f
                 self.f_etc.write(timeString)
                 self.f_etc.write(' ')
                 for j in foodData:
                     for i in j:
-                        print("MODEL", str(i))
+                        print("MODEL str(i)", str(i))
                         self.f_etc.write(str(i))
                         self.f_etc.write(' ')
+                self.f_etc.write(str(imgSize))
+                self.f_etc.write(' ')
                 self.f_etc.write('\n')
                 self.f_etc.close()
 
                 bufSizeForImgWrite = 1024
                 imgSize = len(binImg)
+                print("MODEL imgSize in bin", imgSize)
                 bytesWritten = 0
                 while bytesWritten < imgSize:
                     tmpBufForImgWrite = binImg[bytesWritten:bytesWritten+bufSizeForImgWrite]
-                    # print(str(tmpBufForImgWrite))
-                    # print("try write")
-                    # print(str(self.f_img))
                     try:
                         self.f_img.write(tmpBufForImgWrite)
                     except Exception as e:
@@ -70,15 +63,13 @@ class Model:
                         break
                     bytesWritten += len(tmpBufForImgWrite)
                 print("write end")
-                self.f_img.write('\n'.encode('utf-8'))
+                self.f_img.write(b'\n')
                 self.f_img.close()
             else:
                 print("err in getFileptr", "i can't find f_")
 
     # load from the file matching name(time : MMDDHHMM)
-    def loadFoodData(self, timeString) -> None:
-        print(f"timeString : {timeString}")
-        current_date = timeString[:4]
+    def loadFoodData(self):
         try:
             current_os = platform.system()
         except Exception as e:
@@ -86,24 +77,49 @@ class Model:
 
         if current_os == 'Linux':
             print("<LINUX>")
-            # TODO!
-            # get file matching name with current_date ( MMDD )
-            # I THINK this function below should be changed to get file
-            # which has name starting with current_date (MMDD_img and MMDD_etc)
-            self.getFilePtr(current_date)
-            # WHAT?
-            # this is in Assuming that getFileptr
-            if self.f_etc is not None and self.f_img is not None:
-                print("loadFoodData")
-               # 1. read etc file
-               # 2. get line ( it is a data with timestring/food_name/nutrients... )
-               # 3. parsing the line by '\n'
-               # 4. read img file
-               # 5. get line
-               # 6. read bin to
-               # eg. file.readline()
+            dayStr = time.localtime(time.time())
+            dayStrTrimmed = str(dayStr.tm_mon) + str(dayStr.tm_mday)
+            result = self.findFilePtr(dayStrTrimmed)
+            if result is None:
+                return None
+            else:
+                fEtc, fImg = result
+
+            # read file (dayStr_etc in str, dayStr_img in bin)
+            if fEtc is not None and fImg is not None:
+                self.f_etc = []
+                self.f_img = []
+                lineCntEtc = 0
+                lineCntImg = 0
+                with open(fEtc, 'r') as readingEtc:
+                    for line in readingEtc:
+                        lineCntEtc = lineCntEtc + 1
+                        tmp = line.split(' ')
+                        self.f_etc.append(tmp)
+                    print("MODEL str read", str(self.f_etc))
+                with open(fImg, 'rb') as readingImg:
+                    print("MODEL images_binary size when read", os.path.getsize(fImg))
+                    img_bin_list = []
+                    for idx in range(0, len(self.f_etc)):
+                        img_bin = readingImg.read(int(self.f_etc[idx][9]))
+                        img_bin_list.append(img_bin)
+                        readingImg.read(1)
+
+                    for i in img_bin_list:
+                        print("MODEL bin size", len(i))
+                    img_bin_list = [
+                        np.asarray(bytearray(tmp_img), dtype=np.uint8) for tmp_img in img_bin_list if tmp_img
+                    ]
+                    for i in img_bin_list:
+                        lineCntImg = lineCntImg+1
+                        self.f_img.append(cv2.imdecode(i, flags=cv2.IMREAD_COLOR))
+                        print("MODEL f_img type", type(self.f_img[0]))
+
+                print("MODEL lineEtc", lineCntEtc, " lineImg", lineCntImg)
+                return self.f_etc, self.f_img
 
     # make file or open file and naming it using date argument(MMDDHHMM)
+    # used in write file
     def getFilePtr(self, date):
         self.f_etc = None
         self.f_img = None
@@ -126,6 +142,26 @@ class Model:
         else:
             self.f_etc = open(fileAddr_etc, "w")
             self.f_img = open(fileAddr_img, "wb")
+
+    # find files already existed for loading data(text, img)
+    # used in before switch to DietWidget(diet_widget) from main
+    def findFilePtr(self, date):
+        imgFile = None
+        textFile = None
+
+        # make var having same name with target
+        folderName = './data/'
+        fileNameDefault = folderName + date + '_'
+
+        # check there are 2 files (dayStr_etc, dayStr_img)
+        if len(glob.glob(fileNameDefault+'*')) != 2:
+            print("MODEL no data in today")
+            return None
+
+        # open files for reading data
+        fileEtc = fileNameDefault + 'etc'
+        fileImg = fileNameDefault + 'img'
+        return fileEtc, fileImg
 
     # http request using foodName list following menu board
     def foodInfoRequest(self, foodName: str) -> list:
