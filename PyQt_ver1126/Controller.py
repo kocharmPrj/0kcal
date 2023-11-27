@@ -202,9 +202,9 @@ class MainWindow(QMainWindow):
         self._food_dialog.ui.btnToCancel.clicked.connect(
             self.INFOOD_cancel_food_dialog
         )
-        print("len of names_list : ", len(label_names_list))
+        print("CONTROLLER len of names_list : ", len(label_names_list))
         for elem in label_names_list:
-            print("elem : ", elem)
+            print("CONTROLLER elem : ", elem)
         for foodName in label_names_list:
             foodList.append(self.modelClass.foodInfoRequest(foodName))
         # self._food_dialog.ui.chgCnt(len(foodList)+1)

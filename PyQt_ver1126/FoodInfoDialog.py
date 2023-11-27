@@ -21,15 +21,6 @@ class Ui_FoodInfoDialog(object):
             self.tmpPicInDialog = pic
         if mat is not None:
             self.tmpMatInDialog = mat
-        self.foodData = {
-            'name': 'rice',
-            'calorie': 1,
-            'carbo': 2,
-            'protein': 3,
-            'fat': 4,
-            'sugar': 5,
-            'sodium': 6
-            }
         self.btnToStore = QPushButton("store")
         self.btnToCancel = QPushButton("cancel")
 
@@ -43,11 +34,9 @@ class Ui_FoodInfoDialog(object):
 
         self.count = 1
         self.total_nut = [0, 0, 0, 0, 0, 0]
-        # self.database = [["kimchi jjigae","300","10","20","30","40","50","60"], ["galbi","200","11","21","31","41","51","61"]]
-        self.database = [["kimchi jjigae","300","10","20","30","40","50","60"]]
 
-        self.local_db = [[] for _ in range(self.count)]
         self.chgDatabase(foodList)
+        self.local_db = [[] for _ in range(self.count)]
 
     def chgDatabase(self, foodList):
         self.count = len(foodList)
@@ -56,7 +45,7 @@ class Ui_FoodInfoDialog(object):
         for i, elem in enumerate(foodList):
             tmpList = []
             tmpList.append(str(elem['food_name']))
-            tmpList.append(i+1)
+            tmpList.append(str(i+1))
             tmpList.append(elem['calorie'])
             tmpList.append(elem['carbo'])
             tmpList.append(elem['protein'])
@@ -64,6 +53,7 @@ class Ui_FoodInfoDialog(object):
             tmpList.append(elem['sugar'])
             tmpList.append(elem['sodium'])
             tmpList.append(0)  # chk For select Clicked
+            print("FOODINFODIALOG tmpList :", tmpList)
             self.database.append(tmpList)
 
         # self.database = for elem in foodList
@@ -84,6 +74,10 @@ class Ui_FoodInfoDialog(object):
         _translate = QtCore.QCoreApplication.translate
         vol_change = [0.5, 1, 1.5]
         for i in range(6):
+            # chg index 8th to 1 if clicked
+            self.database[x][1] = vol_change[self.volumn_list[x].currentIndex()]
+            self.database[x][8] = 1
+
             self.local_db[x][i+2] = float(self.database[x][i+2])*vol_change[self.volumn_list[x].currentIndex()]
             self.total_nut[i] -= float(self.database[x][i+2])*vol_change[self.tmp_button_index]
             self.total_nut[i] += self.local_db[x][i+2]
@@ -301,31 +295,33 @@ class Ui_FoodInfoDialog(object):
         _translate = QtCore.QCoreApplication.translate
         FoodInfoDialog.setWindowTitle(_translate("FoodInfoDialog", "Dialog"))
         item = self.nutrition_table.horizontalHeaderItem(0)
-        item.setText(_translate("FoodInfoDialog", "Carbo[g]"))
-        item = self.nutrition_table.horizontalHeaderItem(1)
-        item.setText(_translate("FoodInfoDialog", "Protein[g]"))
-        item = self.nutrition_table.horizontalHeaderItem(2)
-        item.setText(_translate("FoodInfoDialog", "Fat[g]"))
-        item = self.nutrition_table2.horizontalHeaderItem(0)
         item.setText(_translate("FoodInfoDialog", "Calories[kcal]"))
+        item = self.nutrition_table.horizontalHeaderItem(1)
+        item.setText(_translate("FoodInfoDialog", "Carbo[g]"))
+        item = self.nutrition_table.horizontalHeaderItem(2)
+        item.setText(_translate("FoodInfoDialog", "Protein[g]"))
+        item = self.nutrition_table2.horizontalHeaderItem(0)
+        item.setText(_translate("FoodInfoDialog", "Fat[g]"))
         item = self.nutrition_table2.horizontalHeaderItem(1)
         item.setText(_translate("FoodInfoDialog", "Sugar[g]"))
         item = self.nutrition_table2.horizontalHeaderItem(2)
-        item.setText(_translate("FoodInfoDialog", "Sodium[g]"))
+        item.setText(_translate("FoodInfoDialog", "Sodium[mg]"))
 
         self.nutrition.setText(_translate("FoodInfoDialog", "Nutritional Information"))
         self.date.setText(_translate("FoodInfoDialog", "2023/11/24   12:08"))
 
         for i in range(self.count):
-            self.food_name_list[i].setText(_translate("FoodInfoDialog", self.database[i][0]))
-            self.local_db[i].append(self.database[i][0])
+            self.food_name_list[i].setText(
+                _translate("FoodInfoDialog", self.database[i][0])
+            )
+            self.local_db[i] = self.database[i][0]
             self.volumn1 = str(int(float(self.database[i][1])/2))
             self.volumn2 = self.database[i][1]
             self.volumn3 = str(int(float(self.database[i][1])*1.5))
-            self.local_db[i].append(self.volumn2)
+            self.local_db[i] = str(self.volumn2)
             vol_change = [0.5, 1, 1.5]
             for j in range(6):
-                self.local_db[i].append(float(self.database[i][j+2])*vol_change[self.volumn_list[i].currentIndex()])
+                self.local_db[i] = float(self.database[i][j+2])*vol_change[self.volumn_list[i].currentIndex()]
                 self.total_nut[j] += float(self.database[i][j+2])*vol_change[self.volumn_list[i].currentIndex()]
             self.volumn_list[i].setItemText(0, _translate("FoodInfoDialog", self.volumn1))
             self.volumn_list[i].setItemText(1, _translate("FoodInfoDialog", self.volumn2))
