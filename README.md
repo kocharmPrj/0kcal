@@ -37,9 +37,7 @@ python Controller.py
 
 ## Output
 
-* (프로젝트 실행 화면 캡쳐)
-
-![./result.jpg](./result.jpg)
+![image](https://github.com/kocharmPrj/0kcal/assets/142784142/194a0c78-4eff-42fb-981e-c800fda7cfa7)
 
 ## Appendix
 
