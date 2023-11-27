@@ -20,7 +20,6 @@ class Model:
 
     # get pix, time, foodData and store it into ./data/
     def storeFoodData(self, qPixmapData: QPixmap, timeString: str, foodData: list) -> None:
-        print(f"timeString : {timeString}")
         current_date = timeString[:4]
         try:
             current_os = platform.system()
@@ -28,7 +27,6 @@ class Model:
             print(f"i dont know your os : {e}")
 
         if current_os == 'Linux':
-            print("<LINUX>")
             self.getFilePtr(current_date)
             if self.f_etc is not None and self.f_img is not None:
 
@@ -52,7 +50,6 @@ class Model:
 
                 bufSizeForImgWrite = 1024
                 imgSize = len(binImg)
-                print("MODEL imgSize in bin", imgSize)
                 bytesWritten = 0
                 while bytesWritten < imgSize:
                     tmpBufForImgWrite = binImg[bytesWritten:bytesWritten+bufSizeForImgWrite]
@@ -62,7 +59,6 @@ class Model:
                         print("Err", e)
                         break
                     bytesWritten += len(tmpBufForImgWrite)
-                print("write end")
                 self.f_img.write(b'\n')
                 self.f_img.close()
             else:
@@ -76,7 +72,6 @@ class Model:
             print(f"i dont know your os : {e}")
 
         if current_os == 'Linux':
-            print("<LINUX>")
             dayStr = time.localtime(time.time())
             dayStrTrimmed = str(dayStr.tm_mon) + str(dayStr.tm_mday)
             result = self.findFilePtr(dayStrTrimmed)
@@ -96,26 +91,22 @@ class Model:
                         lineCntEtc = lineCntEtc + 1
                         tmp = line.split(' ')
                         self.f_etc.append(tmp)
-                    print("MODEL str read", str(self.f_etc))
                 with open(fImg, 'rb') as readingImg:
-                    print("MODEL images_binary size when read", os.path.getsize(fImg))
                     img_bin_list = []
+
                     for idx in range(0, len(self.f_etc)):
                         img_bin = readingImg.read(int(self.f_etc[idx][9]))
                         img_bin_list.append(img_bin)
                         readingImg.read(1)
 
-                    for i in img_bin_list:
-                        print("MODEL bin size", len(i))
                     img_bin_list = [
                         np.asarray(bytearray(tmp_img), dtype=np.uint8) for tmp_img in img_bin_list if tmp_img
                     ]
                     for i in img_bin_list:
                         lineCntImg = lineCntImg+1
                         self.f_img.append(cv2.imdecode(i, flags=cv2.IMREAD_COLOR))
-                        print("MODEL f_img type", type(self.f_img[0]))
 
-                print("MODEL lineEtc", lineCntEtc, " lineImg", lineCntImg)
+
                 return self.f_etc, self.f_img
 
     # make file or open file and naming it using date argument(MMDDHHMM)
@@ -155,7 +146,6 @@ class Model:
 
         # check there are 2 files (dayStr_etc, dayStr_img)
         if len(glob.glob(fileNameDefault+'*')) != 2:
-            print("MODEL no data in today")
             return None
 
         # open files for reading data
@@ -165,9 +155,7 @@ class Model:
 
     # http request using foodName list following menu board
     def foodInfoRequest(self, foodName: str) -> list:
-        print("MODEL original foodName :", str(foodName))
         foodName = self.getHighestSimilarityFoodName(foodName)
-        print("MODEL foodName in foodInfoRequest Func:", foodName)
         url = 'http://124.55.13.180:5001/requestFoodData'
         data = {'foodName': foodName}
         res = requests.post(url, data=data)
@@ -188,9 +176,9 @@ class Model:
             'bread', "hamburgsteak", "cheezepizza", "bulgogipizza",
             "potatopizza", "potatopizza", "pepperonipizza", "tomatopasta",
             "creampasta", "cola", "americano", "fantaorange", "rice",
-            "soybean paste stew", "seaweed soup", "seaweed", "spinach",
-            "marinated raw crabs", "japchae", "grilled short ribs",
-            "grilled mackerel", "sessoned mung bean sprouts"
+            "soybean-paste-stew", "seaweed-soup", "seaweed", "spinach",
+            "marinated-raw-crabs", "japchae", "grilled-short-ribs",
+            "grilled-mackerel", "seasoned-mung-bean-sprouts"
         )
         for iFoodName in tupleFoodList:
             tmpSimilarityScore = SequenceMatcher(None, foodName, iFoodName)

@@ -15,7 +15,7 @@ class RunVideo(QThread):
     def run(self):
         try:
             if self.cap is None:
-                self.cap = VideoCapture(1)
+                self.cap = VideoCapture(0)
                 if not self.cap.isOpened():
                     raise RuntimeError("Failed to o+pen cam")
                 while self.running:

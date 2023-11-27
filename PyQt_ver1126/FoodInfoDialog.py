@@ -54,7 +54,6 @@ class Ui_FoodInfoDialog(object):
             tmpList.append(elem['sugar'])
             tmpList.append(elem['sodium'])
             tmpList.append(0)  # chk For select Clicked
-            print("FOODINFODIALOG tmpList :", tmpList)
             self.database.append(tmpList)
 
         # self.database = for elem in foodList
@@ -82,10 +81,6 @@ class Ui_FoodInfoDialog(object):
             self.local_db[x][i+2] = round(self.local_db[x][i+2], 3)
             self.total_nut[i] -= float(self.database[x][i+2]) * vol_change[self.tmp_button_index]
             self.total_nut[i] += self.local_db[x][i+2]
-        print("FOODINFO selected database", str(self.database[x]))
-        print("FOODINFO selected local_db", str(self.local_db[x]))
-        print("FOODINFO timelist", self.timeList)
-        print("FOODINFO time_str", self.timeStr)
 
         self.tmp_button_index = self.volumn_list[x].currentIndex()
         item = self.nutrition_table.item(0, 0)
@@ -100,8 +95,7 @@ class Ui_FoodInfoDialog(object):
         item.setText(_translate("FoodInfoDialog", str(self.total_nut[4])))
         item = self.nutrition_table2.item(0, 2)
         item.setText(_translate("FoodInfoDialog", str(self.total_nut[5])))
-        print(self.local_db)
-        print(self.total_nut)
+
 
     def setFoodFrame(self, x):
         food_frame = QtWidgets.QFrame(self.frame)
