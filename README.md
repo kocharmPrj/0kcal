@@ -8,7 +8,8 @@
 ## Clone code
 
 ```shell
-mkdir 0kcal_Prj && $_
+mkdir 0kcal_Prj
+cd 0kcal_Prj
 git clone https://github.com/kocharmPrj/0kcal.git
 ```
 
@@ -20,6 +21,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 opencv-python 설치 시 pyqt5와 opencv-python안에 있는 qt와 충돌 발생
+
 ```shell
 cd .venv/lib/python3.10/site-packages/cv2
 rm -rf qt
