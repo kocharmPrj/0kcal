@@ -36,16 +36,16 @@ class Model:
                 imgSize = len(binImg)
 
                 # write data into f
-                self.f_etc.write(timeString)
-                self.f_etc.write(' ')
                 for j in foodData:
+                    self.f_etc.write(timeString)
+                    self.f_etc.write(' ')
                     for i in j:
                         print("MODEL str(i)", str(i))
                         self.f_etc.write(str(i))
                         self.f_etc.write(' ')
-                self.f_etc.write(str(imgSize))
-                self.f_etc.write(' ')
-                self.f_etc.write('\n')
+                    self.f_etc.write(str(imgSize))
+                    self.f_etc.write(' ')
+                    self.f_etc.write('\n')
                 self.f_etc.close()
 
                 bufSizeForImgWrite = 1024
