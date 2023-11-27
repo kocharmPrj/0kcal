@@ -23,7 +23,7 @@ class MainScreen(QWidget):
         self.ui.setupUi(self)
 
         # Add Button
-        self.ui.pushButton_todayDiet.clicked.connect(parent.switch_diet)
+        self.ui.pushButton_todayDiet.clicked.connect(parent.INMAIN_switch_diet_widget)
         self.ui.pushButton_galleryView.clicked.connect(parent.switch_gallery)
         self.ui.pushButton_foodInfo.clicked.connect(parent.INMAIN_show_food_dialog)
         self.ui.pushButton_menuInfo.clicked.connect(parent.INMAIN_show_menu_dialog)
@@ -116,8 +116,18 @@ class MainWindow(QMainWindow):
     def switch_home(self):
         self.stacked_widget.setCurrentIndex(0)
 
-    def switch_diet(self):
-        self.stacked_widget.setCurrentIndex(1)
+    def INMAIN_switch_diet_widget(self):
+        returnFile = self.modelClass.loadFoodData()
+        if returnFile is None:
+            self.msg.setIcon(QMessageBox.Information)
+            self.msg.setWindowTitle("오류 메세지")
+            self.msg.setText("   오늘의 기록이 없습니다.!   ")
+            self.msg.exec_()
+        else:
+            textInFile, imgInFile = returnFile
+            print("INMAIN_switch_diet TEST SUCCESS")
+            self.diet_screen.ui.setData(textInFile, imgInFile)
+            self.stacked_widget.setCurrentIndex(1)
 
     def switch_gallery(self):
         self.msg.setIcon(QMessageBox.Information)
@@ -200,6 +210,7 @@ class MainWindow(QMainWindow):
             self.main_screen.ui.tmpMat,
             foodList
         )
+
         self._food_dialog.ui.btnToStore.clicked.connect(
             lambda: self.INFOOD_store_food_data(
                 self.main_screen.ui.tmpMat,
