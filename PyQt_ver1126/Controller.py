@@ -28,17 +28,20 @@ class MainScreen(QWidget):
         self.ui.pushButton_foodInfo.clicked.connect(parent.INMAIN_show_food_dialog)
         self.ui.pushButton_menuInfo.clicked.connect(parent.INMAIN_show_menu_dialog)
 
+
 class DietScreen(QWidget):
     def __init__(self):
         super().__init__()
         self.ui = Ui_DietWidget()
         self.ui.setupUi(self)
 
+
 class GalleryScreen(QWidget):
     def __init__(self):
         super().__init__()
         self.ui = Ui_DietWidget()
         self.ui.setupUi(self)
+
 
 class FoodinfoScreen(QDialog):
     def __init__(self, pic, mat, foodList):
@@ -54,6 +57,7 @@ class FoodinfoScreen(QDialog):
                 partial(self.ui.selectButtonTo, i)
             )
 
+
 class MenuInfoScreen(QDialog):
     def __init__(self, pic, mat, foodList):
         super().__init__()
@@ -67,6 +71,7 @@ class MenuInfoScreen(QDialog):
             self.ui.select_button_list[i].clicked.connect(
                 partial(self.ui.selectButtonTo, i)
             )
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -198,16 +203,16 @@ class MainWindow(QMainWindow):
         self._food_dialog.ui.btnToStore.clicked.connect(
             lambda: self.INFOOD_store_food_data(
                 self.main_screen.ui.tmpMat,
-                ''.join(map(str, self._food_dialog.ui.timeList)),
-                self._food_dialog.ui.database
+                ''.join(map(str, self._food_dialog.ui.timeStr)),
+                self._food_dialog.ui.local_db
             )
         )
         self._food_dialog.ui.btnToCancel.clicked.connect(
             self.INFOOD_cancel_food_dialog
         )
-        print("len of names_list : ", len(label_names_list))
+        print("CONTROLLER len of names_list : ", len(label_names_list))
         for elem in label_names_list:
-            print("elem : ", elem)
+            print("CONTROLLER elem : ", elem)
         for foodName in label_names_list:
             foodList.append(self.modelClass.foodInfoRequest(foodName))
         # self._food_dialog.ui.chgCnt(len(foodList)+1)
