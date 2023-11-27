@@ -46,20 +46,21 @@ class Model:
                     self.f_etc.write(str(imgSize))
                     self.f_etc.write(' ')
                     self.f_etc.write('\n')
-                self.f_etc.close()
 
-                bufSizeForImgWrite = 1024
-                imgSize = len(binImg)
-                bytesWritten = 0
-                while bytesWritten < imgSize:
-                    tmpBufForImgWrite = binImg[bytesWritten:bytesWritten+bufSizeForImgWrite]
-                    try:
-                        self.f_img.write(tmpBufForImgWrite)
-                    except Exception as e:
-                        print("Err", e)
-                        break
-                    bytesWritten += len(tmpBufForImgWrite)
-                self.f_img.write(b'\n')
+                    bufSizeForImgWrite = 1024
+                    imgSize = len(binImg)
+                    bytesWritten = 0
+                    while bytesWritten < imgSize:
+                        tmpBufForImgWrite = binImg[bytesWritten:bytesWritten+bufSizeForImgWrite]
+                        try:
+                            self.f_img.write(tmpBufForImgWrite)
+                        except Exception as e:
+                            print("Err", e)
+                            break
+                        bytesWritten += len(tmpBufForImgWrite)
+                    self.f_img.write(b'\n')
+
+                self.f_etc.close()
                 self.f_img.close()
             else:
                 print("err in getFileptr", "i can't find f_")
