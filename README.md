@@ -3,7 +3,8 @@
 하루 내에 기록된 정보를 바탕으로 하루 권장 칼로리 대비 섭취 칼로리 계산을 통해 식단관리를 해준다.
 
 ## High Level Design
-![image](https://github.com/kocharmPrj/0kcal/assets/97004727/084f031f-3ae7-4855-b8b6-fd5a3a737b3c)
+
+![image](https://github.com/kocharmPrj/0kcal/assets/142784142/b029e36d-bd3c-4ac7-9c88-dde50782227c)
 
 ## Clone code
 
@@ -16,25 +17,14 @@ git clone https://github.com/kocharmPrj/0kcal.git
 ## Prerequite
 
 ```shell
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-opencv-python 설치 시 pyqt5와 opencv-python안에 있는 qt와 충돌 발생
-
-```shell
-cd .venv/lib/python3.10/site-packages/cv2
-rm -rf qt
+cd 0kcal
+./install.sh
 ```
 
 ## How to run
 
 ```shell
-cd ~/0kcal_Prj
-source .venv/bin/activate
-
-cd ~/0kcal_Prj/0kcal/PyQt_0kcal
-python Controller.py
+./run.sh
 ```
 
 ## Output
@@ -42,5 +32,6 @@ python Controller.py
 ![image](https://github.com/kocharmPrj/0kcal/assets/142784142/194a0c78-4eff-42fb-981e-c800fda7cfa7)
 
 ## Appendix
+DB table 생성 및 통신 서버 구축 필요
+* ![image](https://github.com/kocharmPrj/0kcal/assets/142784142/5690ff1e-d085-4ad7-9add-8a855c95c91d)
 
-* (참고 자료 및 알아두어야할 사항들 기술)
