@@ -97,7 +97,7 @@ class MainWindow(QMainWindow):
 
         # Associating buttons with interations
         self.switch_button = QPushButton("", self)
-        self.switch_button.setGeometry(QtCore.QRect(740, 40, 45, 40))
+        self.switch_button.setGeometry(QtCore.QRect(70, 40, 45, 40))
         self.switch_button.setStyleSheet("border-image:url(\"home.png\");\n")
         self.switch_button.clicked.connect(self.switch_home)
 
@@ -119,6 +119,7 @@ class MainWindow(QMainWindow):
         returnFile = self.modelClass.loadFoodData()
         if returnFile is None:
             self.msg.setIcon(QMessageBox.Information)
+            self.msg.setGeometry(QtCore.QRect(400, 400, 200, 300))
             self.msg.setWindowTitle("오류 메세지")
             self.msg.setText("   오늘의 기록이 없습니다.!   ")
             self.msg.exec_()
@@ -132,6 +133,7 @@ class MainWindow(QMainWindow):
     def switch_gallery(self):
         self.msg.setIcon(QMessageBox.Information)
         self.msg.setWindowTitle("오류 메세지")
+        self.msg.setGeometry(QtCore.QRect(400, 400, 200, 300))
         self.msg.setText("   To be continue...   ")
         self.msg.exec_()
 
@@ -192,6 +194,7 @@ class MainWindow(QMainWindow):
         except Exception as e:
             self.msg.setIcon(QMessageBox.Information)
             self.msg.setWindowTitle("오류 메세지")
+            self.msg.setGeometry(QtCore.QRect(400, 400, 200, 300))
             self.msg.setText("   메뉴가 인식되지 않았습니다!   ")
             self.msg.exec_()
 
@@ -231,6 +234,7 @@ class MainWindow(QMainWindow):
         if label_names_list == []:
             self.msg.setIcon(QMessageBox.Information)
             self.msg.setWindowTitle("오류 메세지")
+            self.msg.setGeometry(QtCore.QRect(400, 400, 200, 300))
             self.msg.setText("   음식이 인식되지 않았습니다!   ")
             self.msg.exec_()
         else:
