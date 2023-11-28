@@ -13,10 +13,8 @@ openvino==2023.1.0
 openvino-dev==2023.1.0
 openvino-telemetry==2023.2.1
 Pillow==10.1.0
-PyQt5==5.15.10
-PyQt5-Qt5==5.15.2
+PyQt5==5.14.2
 PyQt5-sip==12.13.0
-PySide2==5.15.2.1
 PyYAML==6.0.1
 requests==2.31.0
 scipy==1.10.1
