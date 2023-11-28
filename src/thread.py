@@ -1,11 +1,11 @@
 # This Python file uses the following encoding: utf-8
 import numpy as np
-from PySide2.QtCore import Signal, QThread
+from PyQt5.QtCore import pyqtSignal, QThread
 from cv2 import VideoCapture
 
 
 class RunVideo(QThread):
-    matSignal = Signal(np.ndarray)
+    matSignal = pyqtSignal(np.ndarray)
 
     def __init__(self):
         super().__init__()

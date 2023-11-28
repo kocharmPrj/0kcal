@@ -103,15 +103,15 @@ class MainWindow(QMainWindow):
         # Associating buttons with interations
         self.switch_button = QPushButton("", self)
         self.switch_button.setGeometry(QtCore.QRect(750, 40, 45, 40))
-        self.switch_button.setStyleSheet("border-image:url(\"home.png\");\n")
+        self.switch_button.setStyleSheet("border-image:url(\"./src/home.png\");\n")
         self.switch_button.clicked.connect(self.switch_home)
 
         # MessageBox
         self.msg = QMessageBox()
 
         # Load Object
-        self.food_model_xml_path = "model/model.xml"
-        self.food_model_bin_path = "model/model.bin"
+        self.food_model_xml_path = "./src/model/model.xml"
+        self.food_model_bin_path = "./src/model/model.bin"
         self._detector = ObjectDetector(
             self.food_model_xml_path,
             self.food_model_bin_path
@@ -178,7 +178,7 @@ class MainWindow(QMainWindow):
 
     def INMAIN_show_menu_dialog(self):
         try:
-            menu_model_xml_path = "./model/openvino.xml"
+            menu_model_xml_path = "./src/model/openvino.xml"
             self.save_image = self.main_screen.ui.tmpMat
             self._infer = MenuProcessor(
                 self.main_screen.ui.tmpMat,
