@@ -14,7 +14,7 @@ import cv2
 
 class Ui_DietWidget(object):
     def __init__(self):
-        self.count = 2
+        self.count = 0
         self.total_nut = [0,0,0,0,0,0]
         self.database = []
         self.food_img = []
@@ -54,8 +54,8 @@ class Ui_DietWidget(object):
         pixmap = QPixmap.fromImage(q_image)
         new_pixmap = pixmap.scaled(241,191)
         meal_pic.setPixmap(QtGui.QPixmap(new_pixmap))
-
         meal_pic.setObjectName("meal_pic")
+
         meal_name = QtWidgets.QLineEdit(meal)
         meal_name.setGeometry(QtCore.QRect(290, 45, 300, 21))
         font = QtGui.QFont()
@@ -174,7 +174,7 @@ class Ui_DietWidget(object):
         self.scrollArea.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
-        self.scrollArea.setStyleSheet("background-color:rgb(230,230,230);\n")
+        self.scrollArea.setStyleSheet("background-color:rgb(225,230,230);\n")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -2, 696, 500))
         self.scrollAreaWidgetContents.setMinimumSize(QtCore.QSize(0, 2000))
@@ -250,7 +250,7 @@ class Ui_DietWidget(object):
         self.total_info.verticalHeader().setMinimumSectionSize(20)
 
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
-        self.lineEdit.setGeometry(QtCore.QRect(360, 50, 121, 25))
+        self.lineEdit.setGeometry(QtCore.QRect(370, 50, 121, 25))
         font = QtGui.QFont()
         font.setPointSize(15)
         font.setBold(True)

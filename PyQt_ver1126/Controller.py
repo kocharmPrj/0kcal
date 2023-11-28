@@ -8,7 +8,7 @@ from MainWidget import Ui_MainWidget
 from DietWidget import Ui_DietWidget
 from FoodInfoDialog import Ui_FoodInfoDialog
 from MenuInfoDialog import Ui_MenuInfoDialog
-
+from Gallery import Ui_Gallery
 from thread import RunVideo
 from ObjectDetection import ObjectDetector
 from MenuProcess import MenuProcessor
@@ -17,6 +17,11 @@ from Model import Model
 
 
 class MainScreen(QWidget):
+    def __init__(self):
+        self.count = 0
+        self.database = []
+        self.food_img = []
+
     def __init__(self, parent):
         super().__init__(parent)
         self.ui = Ui_MainWidget()
@@ -38,7 +43,7 @@ class DietScreen(QWidget):
 class GalleryScreen(QWidget):
     def __init__(self):
         super().__init__()
-        self.ui = Ui_DietWidget()
+        self.ui = Ui_Gallery()
         self.ui.setupUi(self)
 
 
@@ -97,7 +102,7 @@ class MainWindow(QMainWindow):
 
         # Associating buttons with interations
         self.switch_button = QPushButton("", self)
-        self.switch_button.setGeometry(QtCore.QRect(70, 40, 45, 40))
+        self.switch_button.setGeometry(QtCore.QRect(750, 40, 45, 40))
         self.switch_button.setStyleSheet("border-image:url(\"home.png\");\n")
         self.switch_button.clicked.connect(self.switch_home)
 
@@ -125,17 +130,23 @@ class MainWindow(QMainWindow):
             self.msg.exec_()
         else:
             textInFile, imgInFile = returnFile
-            print(textInFile)
             self.diet_screen.ui.setData(textInFile, imgInFile)
             self.diet_screen.ui.setupUi(self.diet_screen)
             self.stacked_widget.setCurrentIndex(1)
 
     def switch_gallery(self):
-        self.msg.setIcon(QMessageBox.Information)
-        self.msg.setWindowTitle("오류 메세지")
-        self.msg.setGeometry(QtCore.QRect(400, 400, 200, 300))
-        self.msg.setText("   To be continue...   ")
-        self.msg.exec_()
+        returnFile = self.modelClass.loadFoodData()
+        if returnFile is None:
+            self.msg.setIcon(QMessageBox.Information)
+            self.msg.setGeometry(QtCore.QRect(400, 400, 200, 300))
+            self.msg.setWindowTitle("오류 메세지")
+            self.msg.setText("   오늘의 기록이 없습니다.!   ")
+            self.msg.exec_()
+        else:
+            textInFile, imgInFile = returnFile
+            self.gallery_screen.ui.setData(textInFile, imgInFile)
+            self.gallery_screen.ui.setupUi(self.gallery_screen)
+            self.stacked_widget.setCurrentIndex(2)
 
     def popup_food(self):
         self.foodinfo_screen.setWindowTitle('Dialog')
