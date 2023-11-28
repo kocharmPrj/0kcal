@@ -51,7 +51,11 @@ run.sh
 
 ## Output
 
-![image](https://github.com/kocharmPrj/0kcal/assets/142784142/194a0c78-4eff-42fb-981e-c800fda7cfa7)
+![image](https://github.com/kocharmPrj/0kcal/assets/97004727/fbbd5505-a3b2-4755-b1ef-3de4344a6cfa)
+
+![image](https://github.com/kocharmPrj/0kcal/assets/97004727/e172fa10-1717-4395-88af-b926007dd3e5)
+
+![image](https://github.com/kocharmPrj/0kcal/assets/97004727/4a3cedc5-5a47-4437-9119-ccb6d7554717)
 
 ## Appendix
 DB table 생성 및 통신 서버 구축 필요
