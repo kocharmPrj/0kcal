@@ -157,7 +157,7 @@ class Model:
     # http request using foodName list following menu board
     def foodInfoRequest(self, foodName: str) -> list:
         foodName = self.getHighestSimilarityFoodName(foodName)
-        url = 'http://124.55.13.180:5001/requestFoodData'
+        url = 'http://IP:5001/requestFoodData'
         data = {'foodName': foodName}
         res = requests.post(url, data=data)
         if res.status_code == 200:
