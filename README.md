@@ -58,6 +58,6 @@ run.sh
 ![image](https://github.com/kocharmPrj/0kcal/assets/97004727/4a3cedc5-5a47-4437-9119-ccb6d7554717)
 
 ## Appendix
-DB table 생성 및 통신 서버 구축 필요
+DB table 생성 및 통신 서버 구축 필요 (model.py foodInfoRequest 함수의 url 수정 필요)
 * ![image](https://github.com/kocharmPrj/0kcal/assets/142784142/5690ff1e-d085-4ad7-9add-8a855c95c91d)
 
