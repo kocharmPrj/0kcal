@@ -21,10 +21,32 @@ cd 0kcal
 ./install.sh
 ```
 
+install.sh
+
+```shell
+#!/bin/bash
+
+python3 -m venv .venv
+
+source .venv/bin/activate
+
+pip install -r requirements.txt
+
+rm -rf .venv/lib/python3.10/site-packages/cv2/qt
+```
+
 ## How to run
 
 ```shell
 ./run.sh
+```
+
+run.sh
+
+```shell
+#!/bin/bash
+
+.venv/bin/python3 ./src/Controller.py
 ```
 
 ## Output
